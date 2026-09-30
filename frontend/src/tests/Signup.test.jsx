@@ -12,6 +12,7 @@ describe("Signup Component", () => {
     render(<Signup />);
     const username = screen.getByLabelText("Username *");
     expect(username).toBeVisible();
+    expect(username).toBeRequired();
     expect(username).toHaveAttribute("name", "username");
   });
 
@@ -19,6 +20,7 @@ describe("Signup Component", () => {
     render(<Signup />);
     const passwd = screen.getByLabelText("Password *");
     expect(passwd).toBeVisible();
+    expect(passwd).toBeRequired();
     expect(passwd).toHaveAttribute("type", "password");
     expect(passwd).toHaveAttribute("name", "password");
   });
@@ -27,6 +29,7 @@ describe("Signup Component", () => {
     render(<Signup />);
     const confirmPasswd = screen.getByLabelText("Confirm Password *");
     expect(confirmPasswd).toBeVisible();
+    expect(confirmPasswd).toBeRequired();
     expect(confirmPasswd).toHaveAttribute("type", "password");
     expect(confirmPasswd).toHaveAttribute("name", "confirm-password");
   });
