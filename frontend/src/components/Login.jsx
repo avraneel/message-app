@@ -3,11 +3,11 @@ import btnStyles from "../css/Button.module.css";
 import formStyles from "../css/Form.module.css";
 import Logo from "./Logo";
 
-export default function Signup() {
+export default function Login() {
   return (
     <div className={styles.auth}>
       <Logo />
-      <h2>Sign Up</h2>
+      <h2>Log In</h2>
       <form action="" method="post" className={formStyles.form}>
         <div className={formStyles.formBody}>
           <div className={formStyles.formItem}>
@@ -30,18 +30,8 @@ export default function Signup() {
               required
             />
           </div>
-          <div className={formStyles.formItem}>
-            <label htmlFor="confirm-password">Confirm Password *</label>
-            <input
-              type="password"
-              name="confirm-password"
-              id="confirm-password"
-              className={formStyles.inputElement}
-              required
-            />
-          </div>
         </div>
-        <button className={btnStyles.buttonPrimary}>Sign Up</button>
+        <button className={btnStyles.buttonPrimary}>Log In</button>
       </form>
     </div>
   );
