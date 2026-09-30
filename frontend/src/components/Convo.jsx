@@ -1,8 +1,8 @@
 export default function Convo({ name }) {
   return (
-    <article>
+    <li>
       <p>{name}</p>
       <button>Go</button>
-    </article>
+    </li>
   );
 }
