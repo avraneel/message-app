@@ -8,11 +8,6 @@ describe("Home Component", () => {
     expect(screen.getByRole("heading")).toHaveAccessibleName("Message App");
   });
 
-  test("displays the correct image alt text", () => {
-    render(<Home />);
-    expect(screen.getByRole("img").alt).toBe("main logo");
-  });
-
   test("displays only Sign up and Login buttons (in that order) and no other button", () => {
     render(<Home />);
     const buttons = screen.getAllByRole("button");

@@ -1,0 +1,6 @@
+.signup {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  padding: 2rem;
+}
