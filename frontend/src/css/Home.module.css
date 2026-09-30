@@ -1,0 +1,13 @@
+.home {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  gap: 3rem;
+}
+
+.buttonPanel {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  gap: 2rem;
+}

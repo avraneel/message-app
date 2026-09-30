@@ -1,0 +1,11 @@
+.buttonPrimary {
+  background-color: var(--btn-bg);
+  color: var(--txt);
+  border: none;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+}
+
+.buttonPrimary:hover {
+  background-color: var(--cool-horizon);
+}
