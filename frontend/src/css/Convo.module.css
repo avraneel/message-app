@@ -1,0 +1,10 @@
+.convo {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  border: 1px solid var(--btn-bg);
+  border-radius: 1rem;
+}

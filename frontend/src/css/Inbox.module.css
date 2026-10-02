@@ -1,0 +1,7 @@
+.inbox {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  gap: 2rem;
+  padding: 0;
+}

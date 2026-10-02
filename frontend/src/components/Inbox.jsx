@@ -1,4 +1,5 @@
 import Convo from "./Convo";
+import styles from "../css/Inbox.module.css";
 
 export default function Inbox({ contacts }) {
   const convoElements = contacts.map((el, ind) => (
@@ -7,7 +8,7 @@ export default function Inbox({ contacts }) {
 
   return (
     <div>
-      <ul>{convoElements}</ul>
+      <ul className={styles.inbox}>{convoElements}</ul>
     </div>
   );
 }
