@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node --watch app.js",
+    "migrate": "npx prisma migrate dev && npx prisma generate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,7 +13,14 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^7.10.0",
     "dotenv": "^18.0.4",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "passport-local": "^1.0.0",
+    "pg": "^8.23.0"
+  },
+  "devDependencies": {
+    "prisma": "^7.10.0"
   }
 }
