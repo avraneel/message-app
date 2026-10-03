@@ -8,6 +8,7 @@ import { RouterProvider } from "react-router/dom";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Inbox from "./components/Inbox.jsx";
+import Settings from "./components/Settings.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
     path: "/user",
     element: <Inbox contacts={["Aaron", "Beatrice", "Candace", "David"]} />,
   },
+  { path: "Settings", element: <Settings /> },
 ]);
 
 createRoot(document.getElementById("root")).render(

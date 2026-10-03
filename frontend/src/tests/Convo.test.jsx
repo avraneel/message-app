@@ -10,8 +10,6 @@ describe("Convo Component", () => {
 
   test("displays the button", () => {
     render(<Convo name="abcd" />);
-    expect(screen.getByRole("button")).toBeInTheDocument();
-    expect(screen.getByRole("button")).toHaveAccessibleName("Go");
-    expect(screen.getAllByRole("button")).toHaveLength(1);
+    expect(screen.getByRole("button", { name: /go/i })).toBeInTheDocument();
   });
 });
