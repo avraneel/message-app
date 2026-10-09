@@ -20,7 +20,10 @@ app.use(
     httpOnly: true,
     resave: false,
     saveUninitialized: false,
-    cookie: {},
+    cookie: {
+      httpOnly: true,
+      maxAge: 60000,
+    },
   }),
 );
 app.use(passport.session());
