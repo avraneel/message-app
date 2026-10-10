@@ -1,5 +1,5 @@
 .buttonPrimary {
-  background-color: var(--btn-bg);
+  background-color: var(--regal-navy);
   color: var(--txt);
   cursor: pointer;
   text-align: center;
@@ -11,4 +11,16 @@
 
 .buttonPrimary:hover {
   background-color: var(--cool-horizon);
+}
+
+.buttonSecondary {
+  color: #000;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  background-color: var(--pale-sky);
+  color: var(--deep-navy);
 }

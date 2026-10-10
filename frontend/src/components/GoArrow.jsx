@@ -8,8 +8,8 @@ export default function GoArrow() {
       type="image"
       src={imgUrl}
       alt="go"
-      height={64}
-      width={64}
+      height={34}
+      width={34}
     />
   );
 }

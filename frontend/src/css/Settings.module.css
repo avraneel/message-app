@@ -1,12 +1,11 @@
 .settings {
   display: grid;
-  text-align: center;
-  justify-content: center;
+  justify-content: stretch;
   align-content: start;
   gap: 2rem;
   background-color: #bbe1f9;
-  padding: 2rem;
   height: 100vh;
+  padding: 2rem;
 }
 
 .settingsList {
@@ -28,4 +27,23 @@
 
 .settingsListLink {
   text-decoration: none;
+}
+
+.topbarSettings {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  justify-content: stretch;
+  align-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.btnPanel {
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+}
+
+.heading {
+  text-align: center;
 }

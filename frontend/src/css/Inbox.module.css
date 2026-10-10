@@ -6,9 +6,13 @@
 }
 
 .topbarInbox {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  justify-content: space-between;
+  align-items: center;
   text-align: center;
-  padding: 1rem 2rem;
-  background-color: var(--btn-bg);
+  padding: 1rem;
+  background-color: var(--regal-navy);
   color: white;
 }
 

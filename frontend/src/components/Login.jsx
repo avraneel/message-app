@@ -7,7 +7,7 @@ export default function Login() {
   return (
     <div className={styles.auth}>
       <Logo />
-      <h2>Log In</h2>
+      <h2 className={styles.authHeading}>Log In</h2>
       <form action="" method="post" className={formStyles.form}>
         <div className={formStyles.formBody}>
           <div className={formStyles.formItem}>

@@ -7,7 +7,7 @@ export default function Signup() {
   return (
     <div className={styles.auth}>
       <Logo />
-      <h2>Sign Up</h2>
+      <h2 className={styles.authHeading}>Sign Up</h2>
       <form action="" method="post" className={formStyles.form}>
         <div className={formStyles.formBody}>
           <div className={formStyles.formItem}>
