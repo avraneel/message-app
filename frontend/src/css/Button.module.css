@@ -25,6 +25,11 @@
   color: var(--deep-navy);
 }
 
+.buttonSecondary:hover {
+  background-color: var(--cool-horizon);
+  color: var(--txt);
+}
+
 .btnPanel {
   display: grid;
   align-content: center;

@@ -1,4 +1,4 @@
-import Back from "./Back";
+import SecondaryButton from "./SecondaryButton";
 import formStyles from "../css/Form.module.css";
 import btnStyles from "../css/Button.module.css";
 
@@ -28,7 +28,7 @@ export default function ChangeUsername() {
           </div>
         </div>
         <div className={btnStyles.btnPanel}>
-          <Back url="/settings" />
+          <SecondaryButton text="Back" url="/settings" />
           <button className={btnStyles.buttonPrimary}>Submit</button>
         </div>
       </form>

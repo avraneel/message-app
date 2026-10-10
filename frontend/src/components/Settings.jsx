@@ -1,12 +1,12 @@
 import { Link } from "react-router";
-import Back from "./Back";
+import SecondaryButton from "./SecondaryButton";
 import styles from "../css/Settings.module.css";
 import btnStyles from "../css/Button.module.css";
 
 export default function Settings() {
   return (
     <div className={styles.settings}>
-      <h2 className={styles.heading}>Settings</h2>
+      <h1 className={styles.heading}>Settings</h1>
       <ul className={styles.settingsList}>
         <li className={styles.settingsListItem}>
           <Link to="/user/change/username" className={styles.settingsListLink}>
@@ -27,7 +27,7 @@ export default function Settings() {
         </li>
       </ul>
       <div className={styles.btnPanel}>
-        <Back url="/user" />
+        <SecondaryButton text="Back" url="/user" />
         <button className={btnStyles.buttonPrimary}>Logout</button>
       </div>
     </div>

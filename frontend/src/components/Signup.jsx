@@ -1,4 +1,4 @@
-import Back from "./Back";
+import SecondaryButton from "./SecondaryButton";
 import btnStyles from "../css/Button.module.css";
 import formStyles from "../css/Form.module.css";
 import Logo from "./Logo";
@@ -7,7 +7,7 @@ export default function Signup() {
   return (
     <div className={formStyles.formPage}>
       <Logo />
-      <h2 className={formStyles.formHeading}>Sign Up</h2>
+      <h1 className={formStyles.formHeading}>Sign Up</h1>
       <form action="" method="post" className={formStyles.form}>
         <div className={formStyles.formBody}>
           <div className={formStyles.formItem}>
@@ -42,8 +42,8 @@ export default function Signup() {
           </div>
         </div>
         <div className={btnStyles.btnPanel}>
+          <SecondaryButton text="Back" url="/" />
           <button className={btnStyles.buttonPrimary}>Sign Up</button>
-          <Back url="/" />
         </div>
       </form>
     </div>
