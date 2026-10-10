@@ -1,13 +1,13 @@
-import styles from "../css/Auth.module.css";
 import btnStyles from "../css/Button.module.css";
 import formStyles from "../css/Form.module.css";
 import Logo from "./Logo";
+import Back from "./Back";
 
 export default function Login() {
   return (
-    <div className={styles.auth}>
+    <div className={formStyles.formPage}>
       <Logo />
-      <h2 className={styles.authHeading}>Log In</h2>
+      <h2 className={formStyles.formHeading}>Log In</h2>
       <form action="" method="post" className={formStyles.form}>
         <div className={formStyles.formBody}>
           <div className={formStyles.formItem}>
@@ -31,7 +31,10 @@ export default function Login() {
             />
           </div>
         </div>
-        <button className={btnStyles.buttonPrimary}>Log In</button>
+        <div className={btnStyles.btnPanel}>
+          <button className={btnStyles.buttonPrimary}>Log In</button>
+          <Back url="/" />
+        </div>
       </form>
     </div>
   );

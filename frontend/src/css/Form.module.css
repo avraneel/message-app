@@ -1,3 +1,15 @@
+.formPage {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.formHeading {
+  text-align: center;
+}
+
 .form {
   display: grid;
   justify-content: center;

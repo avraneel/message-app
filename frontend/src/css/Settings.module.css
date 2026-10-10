@@ -1,6 +1,6 @@
 .settings {
   display: grid;
-  justify-content: stretch;
+  justify-content: center;
   align-content: start;
   gap: 2rem;
   background-color: #bbe1f9;

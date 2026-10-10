@@ -9,6 +9,8 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Inbox from "./components/Inbox.jsx";
 import Settings from "./components/Settings.jsx";
+import ChangeUsername from "./components/ChangeUsername";
+import ChangePassword from "./components/ChangePassword.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,8 @@ const router = createBrowserRouter([
     element: <Inbox contacts={["Aaron", "Beatrice", "Candace", "David"]} />,
   },
   { path: "Settings", element: <Settings /> },
+  { path: "/user/change/username", element: <ChangeUsername /> },
+  { path: "/user/change/password", element: <ChangePassword /> },
 ]);
 
 createRoot(document.getElementById("root")).render(
