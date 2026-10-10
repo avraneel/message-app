@@ -8,23 +8,28 @@ const strategy = new LocalStrategy(async function verify(
   password,
   done,
 ) {
-  const user = await prisma.user.findUnique({
-    where: {
-      username,
-    },
-  });
-  const check = await bcrypt.compare(password, user.password);
-  if (!user) {
-    return done(null, false, { message: "Incorrect username" });
-  } else if (!check) {
-    return done(null, false, { message: "Incorrect password" });
-  } else {
-    return done(null, user);
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        username,
+      },
+    });
+    const check = await bcrypt.compare(password, user.password);
+    if (!user) {
+      return done(null, false, { message: "Incorrect username" });
+    } else if (!check) {
+      return done(null, false, { message: "Incorrect password" });
+    } else {
+      return done(null, user);
+    }
+  } catch (err) {
+    done(err);
   }
 });
 
 passport.use(strategy);
 
+//
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });

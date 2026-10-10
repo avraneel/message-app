@@ -1,7 +1,21 @@
 .inbox {
   display: grid;
-  justify-content: center;
+  justify-content: stretch;
   align-content: center;
   gap: 2rem;
+}
+
+.topbarInbox {
+  text-align: center;
+  padding: 1rem 2rem;
+  background-color: var(--btn-bg);
+  color: white;
+}
+
+.conversationList {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  gap: 1rem;
   padding: 0;
 }

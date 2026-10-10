@@ -7,8 +7,17 @@ export default function Inbox({ contacts }) {
   ));
 
   return (
-    <div>
-      <ul className={styles.inbox}>{convoElements}</ul>
+    <div className={styles.inbox}>
+      <TopbarInbox />
+      <ul className={styles.conversationList}>{convoElements}</ul>
     </div>
+  );
+}
+
+function TopbarInbox() {
+  return (
+    <nav className={styles.topbarInbox}>
+      <h2>Inbox</h2>
+    </nav>
   );
 }

@@ -1,0 +1,31 @@
+.settings {
+  display: grid;
+  text-align: center;
+  justify-content: center;
+  align-content: start;
+  gap: 2rem;
+  background-color: #bbe1f9;
+  padding: 2rem;
+  height: 100vh;
+}
+
+.settingsList {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  list-style-type: none;
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 1rem;
+}
+
+.settingsListItem {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  padding: 1rem 2rem;
+}
+
+.settingsListLink {
+  text-decoration: none;
+}
