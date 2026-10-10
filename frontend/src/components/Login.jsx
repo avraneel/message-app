@@ -1,7 +1,7 @@
 import btnStyles from "../css/Button.module.css";
 import formStyles from "../css/Form.module.css";
 import Logo from "./Logo";
-import SecondaryButton from "./SecondaryButton";
+import SecondaryButton from "./buttons/ButtonSecondary";
 
 export default function Login() {
   return (
