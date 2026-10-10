@@ -1,6 +1,6 @@
 model Session {
     id        String   @id
     sid       String   @unique
-    data      Json
+    data      String
     expiresAt DateTime
 }
