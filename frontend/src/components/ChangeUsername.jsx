@@ -1,4 +1,4 @@
-import SecondaryButton from "./buttons/ButtonSecondary";
+import SecondaryButton from "./buttons/SecondaryButton";
 import formStyles from "../css/Form.module.css";
 import btnStyles from "../css/Button.module.css";
 

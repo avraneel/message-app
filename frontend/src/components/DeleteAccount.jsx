@@ -1,4 +1,4 @@
-import SecondaryButton from "./buttons/ButtonSecondary";
+import SecondaryButton from "./buttons/SecondaryButton";
 import styles from "../css/DeleteAccount.module.css";
 import btnStyles from "../css/Button.module.css";
 
