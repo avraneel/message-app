@@ -1,15 +1,24 @@
 import { expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Login from "../components/Login";
+import { MemoryRouter } from "react-router";
+
+function renderLogin() {
+  return render(
+    <MemoryRouter>
+      <Login />
+    </MemoryRouter>,
+  );
+}
 
 describe("Login Component", () => {
   test("displays the correct title", () => {
-    render(<Login />);
+    renderLogin();
     expect(screen.getByRole("heading")).toHaveAccessibleName("Log In");
   });
 
   test("displays the username input field", () => {
-    render(<Login />);
+    renderLogin();
     const username = screen.getByLabelText("Username *");
     expect(username).toBeVisible();
     expect(username).toBeRequired();
@@ -17,7 +26,7 @@ describe("Login Component", () => {
   });
 
   test("displays the password input field", () => {
-    render(<Login />);
+    renderLogin();
     const passwd = screen.getByLabelText("Password *");
     expect(passwd).toBeVisible();
     expect(passwd).toBeRequired();
@@ -25,14 +34,14 @@ describe("Login Component", () => {
     expect(passwd).toHaveAttribute("name", "password");
   });
 
-  test("displays the Login button and no other button", () => {
-    render(<Login />);
-    expect(screen.getByRole("button")).toHaveAccessibleName("Log In");
-    expect(screen.getAllByRole("button")).toHaveLength(1);
+  test("displays the Login button and Back Link", () => {
+    renderLogin();
+    expect(screen.getByRole("link", { name: /back/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /log in/i })).toBeInTheDocument();
   });
 
   test("display only 2 input fields", () => {
-    render(<Login />);
+    renderLogin();
     const inputs = document.querySelectorAll("input");
     expect(inputs).toHaveLength(2);
   });

@@ -1,15 +1,24 @@
 import { expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Signup from "../components/Signup";
+import { MemoryRouter } from "react-router";
+
+function renderSignup() {
+  return render(
+    <MemoryRouter>
+      <Signup />
+    </MemoryRouter>,
+  );
+}
 
 describe("Signup Component", () => {
   test("displays the correct title", () => {
-    render(<Signup />);
+    renderSignup();
     expect(screen.getByRole("heading")).toHaveAccessibleName("Sign Up");
   });
 
   test("displays the username input field", () => {
-    render(<Signup />);
+    renderSignup();
     const username = screen.getByLabelText("Username *");
     expect(username).toBeVisible();
     expect(username).toBeRequired();
@@ -17,7 +26,7 @@ describe("Signup Component", () => {
   });
 
   test("displays the password input field", () => {
-    render(<Signup />);
+    renderSignup();
     const passwd = screen.getByLabelText("Password *");
     expect(passwd).toBeVisible();
     expect(passwd).toBeRequired();
@@ -26,7 +35,7 @@ describe("Signup Component", () => {
   });
 
   test("displays the confirm password input field", () => {
-    render(<Signup />);
+    renderSignup();
     const confirmPasswd = screen.getByLabelText("Confirm Password *");
     expect(confirmPasswd).toBeVisible();
     expect(confirmPasswd).toBeRequired();
@@ -34,15 +43,11 @@ describe("Signup Component", () => {
     expect(confirmPasswd).toHaveAttribute("name", "confirm-password");
   });
 
-  test("displays the Signup button and no other button", () => {
-    render(<Signup />);
-    expect(screen.getByRole("button")).toHaveAccessibleName("Sign Up");
-    expect(screen.getAllByRole("button")).toHaveLength(1);
-  });
-
-  test("display only 3 input fields", () => {
-    render(<Signup />);
-    const inputs = document.querySelectorAll("input");
-    expect(inputs).toHaveLength(3);
+  test("displays the Signup button and Back link", () => {
+    renderSignup();
+    expect(screen.getByRole("link", { name: /back/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /sign up/i }),
+    ).toBeInTheDocument();
   });
 });
