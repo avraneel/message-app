@@ -1,14 +1,52 @@
+import { useNavigate } from "react-router";
 import btnStyles from "../css/Button.module.css";
 import formStyles from "../css/Form.module.css";
 import Logo from "./Logo";
 import SecondaryButton from "./buttons/SecondaryButton";
+import url from "../globals";
 
 export default function Login() {
+  let navigate = useNavigate();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const username = formData.get("username");
+    const password = formData.get("password");
+
+    const requestBody = {
+      username: username,
+      password: password,
+    };
+
+    const headers = new Headers({
+      "Content-Type": "application/json",
+    });
+
+    try {
+      const response = await fetch(`${url}/login`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(requestBody),
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+      navigate("/user");
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <div className={formStyles.formPage}>
       <Logo />
       <h1 className={formStyles.formHeading}>Log In</h1>
-      <form action="" method="post" className={formStyles.form}>
+      <form onSubmit={handleSubmit} className={formStyles.form}>
         <div className={formStyles.formBody}>
           <div className={formStyles.formItem}>
             <label htmlFor="username">Username *</label>

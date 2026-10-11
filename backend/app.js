@@ -9,7 +9,13 @@ import authRoutes from "./auth/auth.routes.js";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    // used to send the cookie to client
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use(
   session({
@@ -17,12 +23,10 @@ app.use(
       dbRecordIdIsSessionId: true,
     }),
     secret: process.env.SECRET,
-    httpOnly: true,
     resave: false,
     saveUninitialized: false,
     cookie: {
-      httpOnly: true,
-      maxAge: 60000,
+      maxAge: 1000 * 60 * 60 * 24,
     },
   }),
 );

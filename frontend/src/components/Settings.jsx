@@ -1,9 +1,27 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import SecondaryButton from "./buttons/SecondaryButton";
 import styles from "../css/Settings.module.css";
 import btnStyles from "../css/Button.module.css";
+import url from "../globals";
 
 export default function Settings() {
+  let navigate = useNavigate();
+  async function logout() {
+    const headers = new Headers({
+      "Content-Type": "application/json",
+    });
+
+    const response = await fetch(`${url}/logout`, {
+      method: "POST",
+      headers,
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+    }
+    navigate("/");
+  }
+
   return (
     <div className={styles.settings}>
       <h1 className={styles.heading}>Settings</h1>
@@ -28,7 +46,9 @@ export default function Settings() {
       </ul>
       <div className={styles.btnPanel}>
         <SecondaryButton text="Back" url="/user" />
-        <button className={btnStyles.buttonPrimary}>Logout</button>
+        <button className={btnStyles.buttonPrimary} onClick={logout}>
+          Logout
+        </button>
       </div>
     </div>
   );

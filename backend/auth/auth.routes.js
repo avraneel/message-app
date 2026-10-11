@@ -35,21 +35,24 @@ authRoutes.post("/signup", async (req, res) => {
 authRoutes.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/user",
     failureRedirect: "/login",
     failureMessage: true,
   }),
   (req, res) => {
-    res.redirect(`/${req.user.username}`);
+    res.status(200).json({ message: "logged in" });
   },
 );
 
-authRoutes.get("/logout", (req, res) => {
+authRoutes.post("/logout", (req, res, next) => {
   req.logOut((err) => {
     if (err) {
       return next(err);
     } else {
-      res.redirect("/");
+      req.session.destroy((err) => {
+        if (err) next(err);
+        res.clearCookie("connect.sid");
+        res.status(200).json({ message: "logged out" });
+      });
     }
   });
 });
