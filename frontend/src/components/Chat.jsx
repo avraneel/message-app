@@ -23,7 +23,7 @@ export default function Chat() {
 function Topbar({ username }) {
   return (
     <div className={styles.topBar}>
-      <p>{username}</p>
+      <h3>{username}</h3>
     </div>
   );
 }
