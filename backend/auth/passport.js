@@ -20,6 +20,10 @@ const strategy = new LocalStrategy(async function verify(
     } else if (!check) {
       return done(null, false, { message: "Incorrect password" });
     } else {
+      /**
+       * Now this will set req.user = user, and then req.login() will
+       * be called and which will then called passport.serializeUser()
+       */
       return done(null, user);
     }
   } catch (err) {
@@ -29,8 +33,12 @@ const strategy = new LocalStrategy(async function verify(
 
 passport.use(strategy);
 
-//
+// this will tell what is to be stored in session
 passport.serializeUser((user, done) => {
+  /**
+   * After this, we have req.session.passport.user = user.id,
+   * which will then store the session to our database and send the cookie to client
+   */
   done(null, user.id);
 });
 

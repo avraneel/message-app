@@ -26,6 +26,11 @@ app.use(
     },
   }),
 );
+
+/**
+ * this is the same as passport.authenticate('session'), which will
+ * supply us with req.login(), req.logout() as authenticate() is used
+ */
 app.use(passport.session());
 
 app.use("/", authRoutes);

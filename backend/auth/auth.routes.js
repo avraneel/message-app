@@ -35,6 +35,7 @@ authRoutes.post("/signup", async (req, res) => {
 authRoutes.post(
   "/login",
   passport.authenticate("local", {
+    successRedirect: "/user",
     failureRedirect: "/login",
     failureMessage: true,
   }),
@@ -42,5 +43,15 @@ authRoutes.post(
     res.redirect(`/${req.user.username}`);
   },
 );
+
+authRoutes.get("/logout", (req, res) => {
+  req.logOut((err) => {
+    if (err) {
+      return next(err);
+    } else {
+      res.redirect("/");
+    }
+  });
+});
 
 export default authRoutes;

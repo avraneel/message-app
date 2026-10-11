@@ -1,1 +1,3 @@
-export default function BtnPanel({ data }) {}
+export default function BtnPanel({ data }) {
+  data.forEach((el) => <div></div>);
+}
