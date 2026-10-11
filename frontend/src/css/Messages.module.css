@@ -1,0 +1,21 @@
+.messageWindow {
+  display: grid;
+  align-content: end;
+  gap: 1rem;
+}
+
+.bubble {
+  padding: 0.8rem;
+  background-color: var(--alabaster-grey);
+  border-radius: 1rem;
+}
+
+.received {
+  text-align: left;
+  justify-self: start;
+}
+
+.sent {
+  text-align: right;
+  justify-self: end;
+}

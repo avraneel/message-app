@@ -1,0 +1,27 @@
+.chat {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  gap: 2rem;
+}
+
+.topBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--regal-navy);
+  color: #fff;
+}
+
+.inputArea {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.textArea {
+  border-radius: 1rem;
+  padding: 1rem;
+  resize: none;
+}
