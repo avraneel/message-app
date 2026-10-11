@@ -15,6 +15,7 @@ export default function ChangePassword() {
               name="old-password"
               id="old-password"
               className={formStyles.inputElement}
+              required
             />
           </div>
           <div className={formStyles.formItem}>
@@ -24,6 +25,7 @@ export default function ChangePassword() {
               name="new-password"
               id="new-password"
               className={formStyles.inputElement}
+              required
             />
           </div>
           <div className={formStyles.formItem}>
@@ -33,12 +35,13 @@ export default function ChangePassword() {
               name="confirm-password"
               id="confirm-password"
               className={formStyles.inputElement}
+              required
             />
           </div>
         </div>
         <div className={btnStyles.btnPanel}>
           <SecondaryButton text="Back" url="/settings" />
-          <button className={btnStyles.buttonPrimary}>Submit</button>
+          <button className={btnStyles.buttonPrimary}>Change Password</button>
         </div>
       </form>
     </div>

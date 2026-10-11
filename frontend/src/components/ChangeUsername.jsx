@@ -15,6 +15,7 @@ export default function ChangeUsername() {
               name="old-username"
               id="old-username"
               className={formStyles.inputElement}
+              required
             />
           </div>
           <div className={formStyles.formItem}>
@@ -24,12 +25,13 @@ export default function ChangeUsername() {
               name="new-username"
               id="new-username"
               className={formStyles.inputElement}
+              required
             />
           </div>
         </div>
         <div className={btnStyles.btnPanel}>
           <SecondaryButton text="Back" url="/settings" />
-          <button className={btnStyles.buttonPrimary}>Submit</button>
+          <button className={btnStyles.buttonPrimary}>Change Username</button>
         </div>
       </form>
     </div>
