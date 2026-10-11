@@ -7,3 +7,9 @@
   --deep-navy: #001c55;
   --pale-sky: #eaf7ff;
 }
+
+body {
+  font-family: "Quicksand Variable", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}

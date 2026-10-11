@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./css/reset.css";
+import "@fontsource-variable/quicksand";
 import "./css/index.css";
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
