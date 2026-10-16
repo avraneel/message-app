@@ -1,18 +1,31 @@
 import { Router } from "express";
-import prisma from "../prisma";
+import prisma from "../prisma.js";
 
 const userRoutes = Router();
 
-userRoutes.delete("/delete", (req, res) => {
+userRoutes.delete("/:username", async (req, res) => {
   // first we should logout
-  req.logout();
+  req.logOut((err) => {
+    if (err) {
+      return next(err);
+    } else {
+      req.session.destroy((err) => {
+        if (err) next(err);
+        res.clearCookie("connect.sid");
+      });
+    }
+  });
+  const { username } = req.params;
   // then delete user
-  const user = prisma.user.delete({
+  await prisma.user.delete({
     where: {
-      id,
+      // username is to be gotten from req.user
+      username,
     },
   });
-  res.redirect("/");
+  res.status(204).json({ message: "user deleted" });
 });
 
 userRoutes.patch("/username", (req, res) => {});
+
+export default userRoutes;

@@ -6,6 +6,7 @@ import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import cors from "cors";
 import passport from "./auth/passport.js";
 import authRoutes from "./auth/auth.routes.js";
+import userRoutes from "./auth/user.routes.js";
 
 const app = express();
 
@@ -33,11 +34,12 @@ app.use(
 
 /**
  * this is the same as passport.authenticate('session'), which will
- * supply us with req.login(), req.logout() as authenticate() is used
+ * supply us with req.login(), req.logout() and authenticate() is used
  */
 app.use(passport.session());
 
 app.use("/", authRoutes);
+app.use("/user", userRoutes);
 
 app.listen(process.env.PORT, (err) => {
   if (err) {
