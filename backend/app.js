@@ -17,15 +17,17 @@ app.use(
     credentials: true,
   }),
 );
+
 app.use(express.json());
+
 app.use(
   session({
-    store: new PrismaSessionStore(prisma, {
-      dbRecordIdIsSessionId: true,
-    }),
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
+    store: new PrismaSessionStore(prisma, {
+      dbRecordIdIsSessionId: true,
+    }),
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
     },

@@ -1,0 +1,10 @@
+model Message {
+    id         Int      @id @default(autoincrement())
+    from       User     @relation("ReceivedMessages", fields: [fromUserId], references: [id])
+    fromUserId Int
+    to         User     @relation("SentMessages", fields: [toUserId], references: [id])
+    toUserId   Int
+    time       DateTime
+
+    @@map("messages")
+}
