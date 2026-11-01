@@ -3,8 +3,9 @@ import prisma from "../prisma.js";
 
 const userRoutes = Router();
 
-userRoutes.delete("/:username", async (req, res) => {
+userRoutes.delete("/:username", restrict, async (req, res) => {
   // first we should logout
+  // we should authenticate with session here
   req.logOut((err) => {
     if (err) {
       return next(err);
@@ -23,9 +24,19 @@ userRoutes.delete("/:username", async (req, res) => {
       username,
     },
   });
-  res.status(204).json({ message: "user deleted" });
+  res.status(202).json({ message: "user deleted" });
 });
 
-userRoutes.patch("/username", (req, res) => {});
+userRoutes.get("/", async (req, res) => {
+  res.status(200).json({ message: "you are in user page" });
+});
+
+function restrict(req, res, next) {
+  if (req.get("Cookie") === undefined) {
+    res.status(401).json({ message: "401 Unauthorized" });
+  } else {
+    next();
+  }
+}
 
 export default userRoutes;

@@ -32,16 +32,9 @@ authRoutes.post("/signup", async (req, res) => {
   }
 });
 
-authRoutes.post(
-  "/login",
-  passport.authenticate("local", {
-    failureRedirect: "/login",
-    failureMessage: true,
-  }),
-  (req, res) => {
-    res.status(200).json({ message: "logged in" });
-  },
-);
+authRoutes.post("/login", passport.authenticate("local"), (req, res) => {
+  res.status(200).json({ message: "logged in" });
+});
 
 authRoutes.post("/logout", (req, res, next) => {
   req.logOut((err) => {

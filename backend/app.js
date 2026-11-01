@@ -4,9 +4,10 @@ import session from "express-session";
 import prisma from "./prisma.js";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import cors from "cors";
-import passport from "./auth/passport.js";
-import authRoutes from "./auth/auth.routes.js";
-import userRoutes from "./auth/user.routes.js";
+import passport from "./passport.js";
+import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
+import { restrict } from "./restrict.js";
 
 const app = express();
 
@@ -29,7 +30,7 @@ app.use(
       dbRecordIdIsSessionId: true,
     }),
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24,
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
     },
   }),
 );
@@ -47,5 +48,5 @@ app.listen(process.env.PORT, (err) => {
   if (err) {
     throw err;
   }
-  console.log(`listening on port ${process.env.PORT}`);
+  console.log(`listening on port ${process.env.PORT}...`);
 });

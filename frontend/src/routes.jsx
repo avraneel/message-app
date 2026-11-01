@@ -7,6 +7,7 @@ import ChangeUsername from "./components/ChangeUsername.jsx";
 import ChangePassword from "./components/ChangePassword.jsx";
 import DeleteAccount from "./components/DeleteAccount.jsx";
 import Chat from "./components/Chat.jsx";
+import RequireAuth from "./components/RequireAuth.jsx";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -14,15 +15,51 @@ const routes = [
   { path: "/login", element: <Login /> },
   {
     path: "/user",
-    element: <Inbox contacts={["Aaron", "Beatrice", "Candace", "David"]} />,
+    element: (
+      <RequireAuth>
+        <Inbox contacts={["Aaron", "Beatrice", "Candace", "David"]} />
+      </RequireAuth>
+    ),
   },
-  { path: "/settings", element: <Settings /> },
-  { path: "/chat", element: <Chat /> },
-  { path: "/user/change/username", element: <ChangeUsername /> },
-  { path: "/user/change/password", element: <ChangePassword /> },
   {
-    path: "/user/delete-account",
-    element: <DeleteAccount username="mockuser" />,
+    path: "settings",
+    element: (
+      <RequireAuth>
+        <Settings />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: "change/username",
+    element: (
+      <RequireAuth>
+        <ChangeUsername />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: "change/password",
+    element: (
+      <RequireAuth>
+        <ChangePassword />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: "delete-account",
+    element: (
+      <RequireAuth>
+        <DeleteAccount username="mockuser" />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: "chat",
+    element: (
+      <RequireAuth>
+        <Chat />
+      </RequireAuth>
+    ),
   },
 ];
 

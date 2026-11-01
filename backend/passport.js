@@ -1,6 +1,6 @@
 import passport from "passport";
 import LocalStrategy from "passport-local";
-import prisma from "../prisma.js";
+import prisma from "./prisma.js";
 import bcrypt from "bcryptjs";
 
 const strategy = new LocalStrategy(async function verify(
@@ -35,13 +35,15 @@ passport.use(strategy);
 
 // this will tell what is to be stored in session
 passport.serializeUser((user, done) => {
-  /**
-   * After this, we have req.session.passport.user = user.id,
-   * which will then store the session to our database and send the cookie to client
-   */
-  done(null, user.id);
+  done(null, user.id); // After this, we have req.session.passport.user = user.id,
 });
 
+/**
+ * before this, connect.sid cookie had session id, and express-session automatically
+ * got session data (that is user id) from req.session
+ * now deserializeUser takes the req.session.passport.user value, aka
+ * deserializedIser and puts it in req.user
+ */
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await prisma.user.findUnique({
