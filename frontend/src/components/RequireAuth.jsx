@@ -4,7 +4,7 @@ export default function RequireAuth() {
   const isAuthenticated = true; // TODO
 
   if (!isAuthenticated) {
-    return <Navigate to="login" />;
+    return <Navigate to="/login" />;
   }
 
   return <Outlet />;
