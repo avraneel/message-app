@@ -41,6 +41,7 @@ authRoutes.post("/logout", (req, res, next) => {
     if (err) {
       return next(err);
     } else {
+      console.log(req.user);
       req.session.destroy((err) => {
         if (err) next(err);
         res.clearCookie("connect.sid");

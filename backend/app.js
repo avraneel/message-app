@@ -12,7 +12,6 @@ const app = express();
 
 app.use(
   cors({
-    // used to send the cookie to client
     origin: `${process.env.ORIGIN}`,
     credentials: true,
   }),
@@ -41,7 +40,7 @@ app.use(
 app.use(passport.session());
 
 app.use("/", authRoutes);
-app.use("/user", userRoutes);
+app.use("/:username", userRoutes);
 
 app.listen(process.env.PORT, (err) => {
   if (err) {
