@@ -28,25 +28,25 @@ export default function Settings() {
       <h1 className={styles.heading}>Settings</h1>
       <ul className={styles.settingsList}>
         <li className={styles.settingsListItem}>
-          <Link to="/user/change/username" className={styles.settingsListLink}>
+          <Link to="username" className={styles.settingsListLink}>
             Change Username
           </Link>
         </li>
         <hr />
         <li className={styles.settingsListItem}>
-          <Link to="/user/change/password" className={styles.settingsListLink}>
+          <Link to="password" className={styles.settingsListLink}>
             Change Password
           </Link>
         </li>
         <hr />
         <li className={styles.settingsListItem}>
-          <Link to="/user/delete-account" className={styles.settingsListLink}>
+          <Link to="delete" className={styles.settingsListLink}>
             Delete Account
           </Link>
         </li>
       </ul>
       <div className={styles.btnPanel}>
-        <SecondaryButton text="Back" url="/user" />
+        <SecondaryButton text="Back" url=".." />
         <button className={btnStyles.buttonPrimary} onClick={logout}>
           Logout
         </button>

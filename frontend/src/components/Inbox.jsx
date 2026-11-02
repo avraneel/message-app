@@ -19,7 +19,7 @@ export default function Inbox({ contacts }) {
 function TopbarInbox() {
   return (
     <nav className={styles.topbarInbox}>
-      <Link to="/settings">
+      <Link to="settings">
         <img src={cogSvgUrl} alt="settings" height={24} width={24} />
       </Link>
       <h2>Inbox</h2>

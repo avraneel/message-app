@@ -40,7 +40,7 @@ export default function ChangePassword() {
           </div>
         </div>
         <div className={btnStyles.btnPanel}>
-          <SecondaryButton text="Back" url="/settings" />
+          <SecondaryButton text="Back" url=".." />
           <button className={btnStyles.buttonPrimary}>Change Password</button>
         </div>
       </form>

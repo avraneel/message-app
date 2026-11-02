@@ -8,58 +8,39 @@ import ChangePassword from "./components/ChangePassword.jsx";
 import DeleteAccount from "./components/DeleteAccount.jsx";
 import Chat from "./components/Chat.jsx";
 import RequireAuth from "./components/RequireAuth.jsx";
+import PageNotFound from "./components/PageNotFound.jsx";
 
 const routes = [
-  { path: "/", element: <Home /> },
-  { path: "/signup", element: <Signup /> },
-  { path: "/login", element: <Login /> },
   {
-    path: "/user",
-    element: (
-      <RequireAuth>
-        <Inbox contacts={["Aaron", "Beatrice", "Candace", "David"]} />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "settings",
-    element: (
-      <RequireAuth>
-        <Settings />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "change/username",
-    element: (
-      <RequireAuth>
-        <ChangeUsername />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "change/password",
-    element: (
-      <RequireAuth>
-        <ChangePassword />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "delete-account",
-    element: (
-      <RequireAuth>
-        <DeleteAccount username="mockuser" />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "chat",
-    element: (
-      <RequireAuth>
-        <Chat />
-      </RequireAuth>
-    ),
+    path: "/",
+    children: [
+      { index: true, Component: Home },
+      { path: "signup", Component: Signup },
+      { path: "login", Component: Login },
+      {
+        path: ":username",
+        Component: RequireAuth,
+        children: [
+          {
+            index: true,
+            element: (
+              <Inbox contacts={["Aaron", "Beatrice", "Candace", "David"]} />
+            ),
+          },
+          { path: "chat", Component: Chat },
+          {
+            path: "settings",
+            children: [
+              { index: true, Component: Settings },
+              { path: "username", Component: ChangeUsername },
+              { path: "password", Component: ChangePassword },
+              { path: "delete", Component: DeleteAccount },
+            ],
+          },
+          { path: "*", Component: PageNotFound },
+        ],
+      },
+    ],
   },
 ];
 

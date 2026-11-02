@@ -28,7 +28,7 @@ export default function DeleteAccount({ username }) {
       </p>
       <p>{username}</p>
       <div className={btnStyles.btnPanel}>
-        <SecondaryButton text="No, Go Back" url="/settings" />
+        <SecondaryButton text="No, Go Back" url=".." />
         <button className={btnStyles.buttonPrimary} onClick={handleClick}>
           Yes, delete my Account
         </button>

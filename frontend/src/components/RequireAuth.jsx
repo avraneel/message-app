@@ -1,11 +1,11 @@
-import { Navigate } from "react-router";
+import { Navigate, Outlet } from "react-router";
 
-export default function RequireAuth({ children }) {
+export default function RequireAuth() {
   const isAuthenticated = true; // TODO
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" />;
+    return <Navigate to="login" />;
   }
 
-  return <>{children}</>;
+  return <Outlet />;
 }
