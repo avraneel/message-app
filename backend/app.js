@@ -13,7 +13,7 @@ const app = express();
 app.use(
   cors({
     // used to send the cookie to client
-    origin: "http://localhost:5173",
+    origin: `${process.env.ORIGIN}`,
     credentials: true,
   }),
 );

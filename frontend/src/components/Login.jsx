@@ -36,7 +36,7 @@ export default function Login() {
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
-      navigate("/user");
+      navigate("/:username");
     } catch (err) {
       console.error(err);
     }
