@@ -1,13 +1,12 @@
 import "dotenv/config";
 import express from "express";
 import session from "express-session";
-import prisma from "./prisma.js";
+import prisma from "./lib/prisma.js";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import cors from "cors";
-import passport from "./passport.js";
+import passport from "./lib/passport.js";
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
-import { restrict } from "./restrict.js";
 
 const app = express();
 

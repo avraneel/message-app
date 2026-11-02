@@ -1,5 +1,5 @@
 import { Router } from "express";
-import prisma from "../prisma.js";
+import prisma from "../lib/prisma.js";
 import bcrypt from "bcryptjs";
 import passport from "passport";
 

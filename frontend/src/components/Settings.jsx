@@ -18,8 +18,9 @@ export default function Settings() {
     });
 
     if (!response.ok) {
+    } else {
+      navigate("/");
     }
-    navigate("/");
   }
 
   return (
