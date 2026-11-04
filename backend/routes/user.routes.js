@@ -3,20 +3,10 @@ import prisma from "../lib/prisma.js";
 
 const userRoutes = Router();
 
-userRoutes.delete("/:username", restrict, async (req, res) => {
+userRoutes.delete("/", restrict, async (req, res) => {
   // first we should logout
   // we should authenticate with session here
-  req.logOut((err) => {
-    if (err) {
-      return next(err);
-    } else {
-      req.session.destroy((err) => {
-        if (err) next(err);
-        res.clearCookie("connect.sid");
-      });
-    }
-  });
-  const { username } = req.params;
+  const username = req.baseUrl.substring(1);
   // then delete user
   await prisma.user.delete({
     where: {
@@ -24,6 +14,16 @@ userRoutes.delete("/:username", restrict, async (req, res) => {
       username,
     },
   });
+  // req.logOut((err) => {
+  //   if (err) {
+  //     return next(err);
+  //   } else {
+  //     req.session.destroy((err) => {
+  //       if (err) next(err);
+  //       res.clearCookie("connect.sid");
+  //     });
+  //   }
+  // });
   res.status(202).json({ message: "user deleted" });
 });
 
