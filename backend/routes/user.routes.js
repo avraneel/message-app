@@ -14,17 +14,17 @@ userRoutes.delete("/", restrict, async (req, res) => {
       username,
     },
   });
-  // req.logOut((err) => {
-  //   if (err) {
-  //     return next(err);
-  //   } else {
-  //     req.session.destroy((err) => {
-  //       if (err) next(err);
-  //       res.clearCookie("connect.sid");
-  //     });
-  //   }
-  // });
-  res.status(202).json({ message: "user deleted" });
+  req.logOut((err) => {
+    if (err) {
+      return next(err);
+    } else {
+      req.session.destroy((err) => {
+        if (err) next(err);
+        res.clearCookie("connect.sid");
+        res.status(202).json({ message: "user deleted" });
+      });
+    }
+  });
 });
 
 userRoutes.get("/", async (req, res) => {
