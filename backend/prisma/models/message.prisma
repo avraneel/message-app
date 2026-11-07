@@ -5,6 +5,7 @@ model Message {
     to         User     @relation("SentMessages", fields: [toUserId], references: [id])
     toUserId   Int
     time       DateTime
+    text       String
 
     @@map("messages")
 }
