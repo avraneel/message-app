@@ -1,13 +1,38 @@
 import { Router } from "express";
+import bcrypt from "bcryptjs";
 import prisma from "../lib/prisma.js";
 
 const userRoutes = Router();
 
+authRoutes.post("/", async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const existingUser = await prisma.user.findUnique({
+      where: { username },
+    });
+    if (existingUser) {
+      res.status(409).json({
+        message: "user already exists",
+      });
+    } else {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      await prisma.user.create({
+        data: {
+          username,
+          password: hashedPassword,
+        },
+      });
+      res.status(201).send({
+        message: "user created",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 userRoutes.delete("/", restrict, async (req, res) => {
-  // first we should logout
-  // we should authenticate with session here
   const username = req.baseUrl.substring(1);
-  // then delete user
   await prisma.user.delete({
     where: { username },
   });
@@ -32,7 +57,7 @@ userRoutes.put("/username", restrict, async (req, res) => {
       where: { id },
       data: { username: newUsername },
     });
-    res.status(200).json({ message: "username update" });
+    res.status(200).json({ message: "username updated" });
   } catch (err) {
     console.error(err);
   }
@@ -45,7 +70,7 @@ userRoutes.put("/password", restrict, async (req, res) => {
     where: { id },
     data: { password: newPassword },
   });
-  res.status(200).json({ message: "password update" });
+  res.status(200).json({ message: "password updated" });
 });
 
 userRoutes.get("/", async (req, res) => {

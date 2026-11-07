@@ -26,7 +26,7 @@ export default function Signup() {
     });
 
     try {
-      const response = await fetch(`${url}/signup`, {
+      const response = await fetch(`${url}/users`, {
         method: "POST",
         headers,
         body: JSON.stringify(requestBody),
