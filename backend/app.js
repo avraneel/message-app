@@ -40,7 +40,7 @@ app.use(
 app.use(passport.session());
 
 app.use("/", authRoutes);
-app.use("/:username", userRoutes);
+app.use("/users", userRoutes);
 
 app.listen(process.env.PORT, (err) => {
   if (err) {

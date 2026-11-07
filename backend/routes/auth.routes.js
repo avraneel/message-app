@@ -4,7 +4,7 @@ import passport from "passport";
 const authRoutes = Router();
 
 authRoutes.post("/login", passport.authenticate("local"), (req, res) => {
-  res.status(200).json({ message: "logged in" });
+  res.status(200).json({ user: req.user });
 });
 
 authRoutes.post("/logout", (req, res, next) => {
@@ -12,11 +12,10 @@ authRoutes.post("/logout", (req, res, next) => {
     if (err) {
       return next(err);
     } else {
-      console.log(req.user);
       req.session.destroy((err) => {
         if (err) next(err);
         res.clearCookie("connect.sid");
-        res.status(200).json({ message: "logged out" });
+        res.status(202).json({ message: "logged out" });
       });
     }
   });

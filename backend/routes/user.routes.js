@@ -4,7 +4,7 @@ import prisma from "../lib/prisma.js";
 
 const userRoutes = Router();
 
-authRoutes.post("/", async (req, res) => {
+userRoutes.post("/", async (req, res) => {
   const { username, password } = req.body;
   try {
     const existingUser = await prisma.user.findUnique({
@@ -31,10 +31,9 @@ authRoutes.post("/", async (req, res) => {
   }
 });
 
-userRoutes.delete("/", restrict, async (req, res) => {
-  const username = req.baseUrl.substring(1);
+userRoutes.delete("/:id", restrict, async (req, res) => {
   await prisma.user.delete({
-    where: { username },
+    where: { id: Number(req.params.id) },
   });
   req.logOut((err) => {
     if (err) {
@@ -49,7 +48,7 @@ userRoutes.delete("/", restrict, async (req, res) => {
   });
 });
 
-userRoutes.put("/username", restrict, async (req, res) => {
+userRoutes.put("/:id/username", restrict, async (req, res) => {
   const { newUsername } = req.body;
   const { id } = req.user;
   try {
@@ -63,7 +62,7 @@ userRoutes.put("/username", restrict, async (req, res) => {
   }
 });
 
-userRoutes.put("/password", restrict, async (req, res) => {
+userRoutes.put("/:id/password", restrict, async (req, res) => {
   const { newPassword } = req.body;
   const { id } = req.user;
   await prisma.user.update({
@@ -73,15 +72,23 @@ userRoutes.put("/password", restrict, async (req, res) => {
   res.status(200).json({ message: "password updated" });
 });
 
-userRoutes.get("/", async (req, res) => {
-  res.status(200).json({ message: "you are in user page" });
+userRoutes.get("/:id", restrict, async (req, res) => {
+  const user = await prisma.user.findUnique({
+    where: { id: Number(req.params.id) },
+  });
+  res.status(200).json({ user });
 });
 
 function restrict(req, res, next) {
-  if (req.get("Cookie") === undefined) {
-    res.status(401).json({ message: "401 Unauthorized. You need a cookie" });
+  if (req.user === undefined) {
+    return res
+      .status(401)
+      .json({ message: "401 Unauthorized. You need a valid cookie" });
+  } else if (Number(req.params.id) !== req.user.id) {
+    return res.status(403).json({
+      message: "403 forbidden. You are not allowed to access this info",
+    });
   } else {
-    // TODO give 403 if sid does not exist in cookie
     next();
   }
 }
