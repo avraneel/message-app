@@ -54,11 +54,4 @@ messageRoutes.post("/", async (req, res) => {
   res.status(201).json({ message: "message created" });
 });
 
-messageRoutes.delete("/:id", async (req, res) => {
-  await prisma.message.delete({
-    where: { id: Number(req.params.id) },
-  });
-  res.status(202).json({ message: "message deleted" });
-});
-
 export default messageRoutes;
