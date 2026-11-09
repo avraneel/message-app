@@ -3,12 +3,36 @@ import prisma from "../lib/prisma.js";
 
 const messageRoutes = Router({ mergeParams: true });
 
-messageRoutes.get("/", async (req, res) => {
-  const { from } = req.params.userId;
+messageRoutes.get("/:toUserId", async (req, res) => {
+  const { userId, toUserId } = req.params;
   try {
     const messages = await prisma.message.findMany({
       where: {
-        fromUserId: from,
+        OR: [
+          {
+            AND: [
+              {
+                fromUserId: Number(userId),
+              },
+              {
+                toUserId: Number(toUserId),
+              },
+            ],
+          },
+          {
+            AND: [
+              {
+                fromUserId: Number(toUserId),
+              },
+              {
+                toUserId: Number(userId),
+              },
+            ],
+          },
+        ],
+      },
+      orderBy: {
+        time: "asc",
       },
     });
     res.status(200).json(messages);
