@@ -8,5 +8,4 @@
 | `/users/:id`                 | GET    | Only same user | Reads specfic user + messages |
 | `/users/:id`                 | PUT    | Only same user | Update username/password      |
 | `/users/:id`                 | DELETE | Only same user | Deletes a user + messages     |
-| `/user/:userId/messages`     | POST   | Only `:userId` | Creates a message             |
-| `/user/:userId/messages/:id` | DELETE | Only `:userId` | Deletes a message             |
+| `/user/:userId/messages/:id` | Get    | Only `:userId` | Gets the chat with `:id`      |
