@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node --watch app.js",
     "migrate": "npx prisma migrate dev && npx prisma generate",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +28,7 @@
     "pg": "^8.23.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.29.7",
     "jest": "^30.5.2",
     "prisma": "^7.10.0",
     "supertest": "^7.3.1"
