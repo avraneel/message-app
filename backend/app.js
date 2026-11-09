@@ -5,9 +5,7 @@ import prisma from "./lib/prisma.js";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import cors from "cors";
 import passport from "./lib/passport.js";
-import authRoutes from "./routes/auth.routes.js";
-import userRoutes from "./routes/user.routes.js";
-import messageRoutes from "./routes/messages.routes.js";
+import router from "./routes/index.js";
 
 const app = express();
 
@@ -40,9 +38,7 @@ app.use(
  */
 app.use(passport.session());
 
-app.use("/", authRoutes);
-app.use("/users", userRoutes);
-app.use("/messages", messageRoutes);
+app.use("/", router);
 
 app.listen(process.env.PORT, (err) => {
   if (err) {

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import bcrypt from "bcryptjs";
 import prisma from "../lib/prisma.js";
+import restrict from "../restrict.js";
 
 const userRoutes = Router();
 
@@ -11,9 +12,7 @@ userRoutes.post("/", async (req, res) => {
       where: { username },
     });
     if (existingUser) {
-      res.status(409).json({
-        message: "user already exists",
-      });
+      res.status(409).json({ message: "user already exists" });
     } else {
       const hashedPassword = await bcrypt.hash(password, 10);
       await prisma.user.create({
@@ -22,9 +21,7 @@ userRoutes.post("/", async (req, res) => {
           password: hashedPassword,
         },
       });
-      res.status(201).send({
-        message: "user created",
-      });
+      res.status(201).send({ message: "user created" });
     }
   } catch (err) {
     console.log(err);
@@ -72,25 +69,16 @@ userRoutes.put("/:id/password", restrict, async (req, res) => {
   res.status(200).json({ message: "password updated" });
 });
 
+userRoutes.get("/", async (req, res) => {
+  const users = await prisma.user.findMany();
+  res.status(200).json(users);
+});
+
 userRoutes.get("/:id", restrict, async (req, res) => {
   const user = await prisma.user.findUnique({
     where: { id: Number(req.params.id) },
   });
   res.status(200).json({ user });
 });
-
-function restrict(req, res, next) {
-  if (req.user === undefined) {
-    return res
-      .status(401)
-      .json({ message: "401 Unauthorized. You need a valid cookie" });
-  } else if (Number(req.params.id) !== req.user.id) {
-    return res.status(403).json({
-      message: "403 forbidden. You are not allowed to access this info",
-    });
-  } else {
-    next();
-  }
-}
 
 export default userRoutes;

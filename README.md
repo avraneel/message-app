@@ -2,8 +2,11 @@
 
 ## Backend API routes
 
-| route    | method | description              |
-| -------- | ------ | ------------------------ |
-| `/users` | POST   | creates a user           |
-| `/users` | DELETE | deletes a user           |
-| `/users` | PUT    | change username/password |
+| Route                        | Method | Auth           | Description                   |
+| ---------------------------- | ------ | -------------- | ----------------------------- |
+| `/users`                     | POST   | Open to all    | Creates a user                |
+| `/users/:id`                 | GET    | Only same user | Reads specfic user + messages |
+| `/users/:id`                 | PUT    | Only same user | Update username/password      |
+| `/users/:id`                 | DELETE | Only same user | Deletes a user + messages     |
+| `/user/:userId/messages`     | POST   | Only `:userId` | Creates a message             |
+| `/user/:userId/messages/:id` | DELETE | Only `:userId` | Deletes a message             |

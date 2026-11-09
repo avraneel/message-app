@@ -8,6 +8,11 @@
   --pale-sky: #eaf7ff;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+  }
+}
+
 body {
   font-family: "Quicksand Variable", sans-serif;
   font-weight: 400;
