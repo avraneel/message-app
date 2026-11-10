@@ -38,7 +38,7 @@ export default function Login() {
       }
       const { user } = await response.json();
       // lifing state up
-      setLoggedInUser(user);
+      localStorage.setItem("userId", JSON.stringify(user.id));
       navigate(`/users/${user.username}`);
     } catch (err) {
       console.error(err);

@@ -7,6 +7,7 @@ import url from "../globals";
 
 export default function Inbox() {
   const [contacts, setContacts] = useState([]);
+  const id = localStorage.getItem("userId");
 
   useEffect(() => {
     const loadContacts = async (userId) => {
@@ -19,8 +20,8 @@ export default function Inbox() {
       setContacts(contactNames);
     };
 
-    loadContacts(7);
-  }, []);
+    loadContacts(id);
+  }, [id]);
 
   console.log("render");
   const convoElements = contacts.map((el, ind) => (
