@@ -5,6 +5,7 @@ import restrict from "../restrict.js";
 
 const userRoutes = Router();
 
+/** Creates a user */
 userRoutes.post("/", async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -28,6 +29,7 @@ userRoutes.post("/", async (req, res) => {
   }
 });
 
+/** Deletes a user */
 userRoutes.delete("/:id", restrict, async (req, res) => {
   await prisma.user.delete({
     where: { id: Number(req.params.id) },
@@ -45,6 +47,7 @@ userRoutes.delete("/:id", restrict, async (req, res) => {
   });
 });
 
+/** Updates a user's username */
 userRoutes.put("/:id/username", restrict, async (req, res) => {
   const { newUsername } = req.body;
   const { id } = req.user;
@@ -59,6 +62,7 @@ userRoutes.put("/:id/username", restrict, async (req, res) => {
   }
 });
 
+/** Updates a user's password */
 userRoutes.put("/:id/password", restrict, async (req, res) => {
   const { newPassword } = req.body;
   const { id } = req.user;
@@ -69,11 +73,27 @@ userRoutes.put("/:id/password", restrict, async (req, res) => {
   res.status(200).json({ message: "password updated" });
 });
 
+/** gets all users */
 userRoutes.get("/", async (req, res) => {
   const users = await prisma.user.findMany();
   res.status(200).json(users);
 });
 
+userRoutes.get("/:id/contacts", async (req, res) => {
+  const contacts = await prisma.user.findMany({
+    where: {
+      id: {
+        not: Number(req.params.id),
+      },
+    },
+    select: {
+      username: true,
+    },
+  });
+  res.status(200).json(contacts);
+});
+
+/** reads own user details */
 userRoutes.get("/:id", restrict, async (req, res) => {
   const user = await prisma.user.findUnique({
     where: { id: Number(req.params.id) },

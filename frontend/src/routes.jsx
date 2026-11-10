@@ -1,3 +1,4 @@
+import Root from "./components/Root.jsx";
 import Home from "./components/Home.jsx";
 import Signup from "./components/Signup.jsx";
 import Login from "./components/Login.jsx";
@@ -13,20 +14,16 @@ import PageNotFound from "./components/PageNotFound.jsx";
 const routes = [
   {
     path: "/",
+    Component: Root,
     children: [
       { index: true, Component: Home },
       { path: "signup", Component: Signup },
       { path: "login", Component: Login },
       {
-        path: ":username",
+        path: "users/:username",
         Component: RequireAuth,
         children: [
-          {
-            index: true,
-            element: (
-              <Inbox contacts={["Aaron", "Beatrice", "Candace", "David"]} />
-            ),
-          },
+          { index: true, Component: Inbox },
           { path: "chat", Component: Chat },
           {
             path: "settings",

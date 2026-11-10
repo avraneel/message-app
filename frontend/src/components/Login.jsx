@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate, useOutletContext } from "react-router";
 import btnStyles from "../css/Button.module.css";
 import formStyles from "../css/Form.module.css";
 import Logo from "./Logo";
@@ -7,6 +7,7 @@ import url from "../globals";
 
 export default function Login() {
   let navigate = useNavigate();
+  const [, setLoggedInUser] = useOutletContext();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -36,7 +37,10 @@ export default function Login() {
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
-      navigate("/:username");
+      const { user } = await response.json();
+      // lifing state up
+      setLoggedInUser(user);
+      navigate(`/users/${user.username}`);
     } catch (err) {
       console.error(err);
     }
