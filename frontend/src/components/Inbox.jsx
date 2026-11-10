@@ -1,15 +1,12 @@
 import Convo from "./Convo";
-import { Link, useOutletContext } from "react-router";
+import { Link } from "react-router";
 import styles from "../css/Inbox.module.css";
 import cogSvgUrl from "../assets/cog.svg";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import url from "../globals";
 
 export default function Inbox() {
   const [contacts, setContacts] = useState([]);
-  const loggedInUser = useOutletContext();
-
-  console.log(loggedInUser);
 
   useEffect(() => {
     const loadContacts = async (userId) => {
@@ -22,8 +19,8 @@ export default function Inbox() {
       setContacts(contactNames);
     };
 
-    loadContacts(loggedInUser.id);
-  }, [loggedInUser.id]);
+    loadContacts(7);
+  }, []);
 
   console.log("render");
   const convoElements = contacts.map((el, ind) => (

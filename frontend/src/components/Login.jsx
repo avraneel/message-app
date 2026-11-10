@@ -1,4 +1,4 @@
-import { useNavigate, useOutletContext } from "react-router";
+import { useNavigate } from "react-router";
 import btnStyles from "../css/Button.module.css";
 import formStyles from "../css/Form.module.css";
 import Logo from "./Logo";
@@ -7,7 +7,6 @@ import url from "../globals";
 
 export default function Login() {
   let navigate = useNavigate();
-  const [, setLoggedInUser] = useOutletContext();
 
   async function handleSubmit(e) {
     e.preventDefault();

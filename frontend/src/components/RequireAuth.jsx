@@ -1,15 +1,12 @@
-import { Navigate, Outlet, useOutletContext } from "react-router";
+import { Navigate, Outlet } from "react-router";
 
 /** This is a like pit stop basically, since outletcontext only works on immediate children */
 export default function RequireAuth() {
-  const [loggedInUser] = useOutletContext();
-  console.log(loggedInUser);
-  const isAuthenticated =
-    JSON.stringify(loggedInUser) === JSON.stringify({}) ? false : true; // TODO
+  const isAuthenticated = true;
 
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
 
-  return <Outlet context={loggedInUser} />;
+  return <Outlet />;
 }
