@@ -1,7 +1,7 @@
 import { Router } from "express";
 import bcrypt from "bcryptjs";
 import prisma from "../lib/prisma.js";
-import restrict from "../restrict.js";
+import { restrict, forbid } from "../restrict.js";
 
 const userRoutes = Router();
 
@@ -30,7 +30,7 @@ userRoutes.post("/", async (req, res) => {
 });
 
 /** Deletes a user */
-userRoutes.delete("/:id", restrict, async (req, res) => {
+userRoutes.delete("/:id", restrict, forbid, async (req, res) => {
   await prisma.user.delete({
     where: { id: Number(req.params.id) },
   });
@@ -48,7 +48,7 @@ userRoutes.delete("/:id", restrict, async (req, res) => {
 });
 
 /** Updates a user's username */
-userRoutes.put("/:id/username", restrict, async (req, res) => {
+userRoutes.put("/:id/username", restrict, forbid, async (req, res) => {
   const { newUsername } = req.body;
   const { id } = req.user;
   try {
@@ -63,7 +63,7 @@ userRoutes.put("/:id/username", restrict, async (req, res) => {
 });
 
 /** Updates a user's password */
-userRoutes.put("/:id/password", restrict, async (req, res) => {
+userRoutes.put("/:id/password", restrict, forbid, async (req, res) => {
   const { newPassword } = req.body;
   const { id } = req.user;
   await prisma.user.update({
@@ -79,7 +79,7 @@ userRoutes.get("/", async (req, res) => {
   res.status(200).json(users);
 });
 
-userRoutes.get("/:id/contacts", restrict, async (req, res) => {
+userRoutes.get("/:id/contacts", restrict, forbid, async (req, res) => {
   const contacts = await prisma.user.findMany({
     where: {
       id: {
@@ -94,7 +94,7 @@ userRoutes.get("/:id/contacts", restrict, async (req, res) => {
 });
 
 /** reads own user details */
-userRoutes.get("/:id", restrict, async (req, res) => {
+userRoutes.get("/:id", restrict, forbid, async (req, res) => {
   const user = await prisma.user.findUnique({
     where: { id: Number(req.params.id) },
   });

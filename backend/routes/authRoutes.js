@@ -1,6 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
-import restrict from "../restrict.js";
+import { restrict } from "../restrict.js";
 
 const authRoutes = Router();
 
