@@ -6,7 +6,6 @@ import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import cors from "cors";
 import passport from "./lib/passport.js";
 import router from "./routes/index.js";
-import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -17,7 +16,6 @@ app.use(
   }),
 );
 
-app.use(cookieParser(`${process.env.SECRET}`));
 app.use(express.json());
 
 app.use(

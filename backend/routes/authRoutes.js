@@ -8,7 +8,7 @@ authRoutes.post("/login", passport.authenticate("local"), (req, res) => {
   res.status(200).json({ user: req.user });
 });
 
-authRoutes.post("/logout", (req, res, next) => {
+authRoutes.post("/logout", restrict, (req, res, next) => {
   req.logOut((err) => {
     if (err) {
       return next(err);
