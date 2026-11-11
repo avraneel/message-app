@@ -8,7 +8,7 @@
  *  */
 export function restrict(req, res, next) {
   if (!req.user) {
-    return res.status(401).json("Your cookie is unauthorized.");
+    return res.status(401).json({ message: "Your cookie is unauthorized." });
   }
   next();
 }
@@ -17,7 +17,9 @@ export function restrict(req, res, next) {
  * another user's data */
 export function forbid(req, res, next) {
   if (Number(req.params.id) !== req.user.id) {
-    return res.status(403).json("You are forbidden to perform this action");
+    return res
+      .status(403)
+      .json({ message: "You are forbidden to perform this action" });
   }
   next();
 }
