@@ -1,5 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
+import restrict from "../restrict.js";
 
 const authRoutes = Router();
 
@@ -19,6 +20,10 @@ authRoutes.post("/logout", (req, res, next) => {
       });
     }
   });
+});
+
+authRoutes.get("/id", restrict, (req, res) => {
+  return res.status(200).json({ userId: req.user.id });
 });
 
 export default authRoutes;

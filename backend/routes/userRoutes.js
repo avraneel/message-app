@@ -79,7 +79,7 @@ userRoutes.get("/", async (req, res) => {
   res.status(200).json(users);
 });
 
-userRoutes.get("/:id/contacts", async (req, res) => {
+userRoutes.get("/:id/contacts", restrict, async (req, res) => {
   const contacts = await prisma.user.findMany({
     where: {
       id: {

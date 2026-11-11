@@ -4,14 +4,17 @@ import styles from "../css/Inbox.module.css";
 import cogSvgUrl from "../assets/cog.svg";
 import { useState, useEffect } from "react";
 import url from "../globals";
+import { fetchId } from "./authCalls";
 
 export default function Inbox() {
   const [contacts, setContacts] = useState([]);
-  const id = localStorage.getItem("userId");
 
   useEffect(() => {
-    const loadContacts = async (userId) => {
-      const response = await fetch(`${url}/users/${userId}/contacts`);
+    const loadContacts = async () => {
+      const userId = await fetchId();
+      const response = await fetch(`${url}/users/${userId}/contacts`, {
+        credentials: "include",
+      });
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
@@ -20,8 +23,8 @@ export default function Inbox() {
       setContacts(contactNames);
     };
 
-    loadContacts(id);
-  }, [id]);
+    loadContacts();
+  }, []);
 
   console.log("render");
   const convoElements = contacts.map((el, ind) => (
