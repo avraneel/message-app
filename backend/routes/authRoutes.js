@@ -23,7 +23,9 @@ authRoutes.post("/logout", restrict, (req, res, next) => {
 });
 
 authRoutes.get("/id", restrict, (req, res) => {
-  return res.status(200).json({ userId: req.user.id });
+  return res
+    .status(200)
+    .json({ userId: req.user.id, username: req.user.username });
 });
 
 export default authRoutes;

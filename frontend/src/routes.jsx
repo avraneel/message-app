@@ -8,7 +8,6 @@ import ChangeUsername from "./components/ChangeUsername.jsx";
 import ChangePassword from "./components/ChangePassword.jsx";
 import DeleteAccount from "./components/DeleteAccount.jsx";
 import Chat from "./components/Chat.jsx";
-import RequireAuth from "./components/RequireAuth.jsx";
 import PageNotFound from "./components/PageNotFound.jsx";
 
 export const routes = [
@@ -21,7 +20,6 @@ export const routes = [
       { path: "login", Component: Login },
       {
         path: "users/:username",
-        Component: RequireAuth,
         children: [
           { index: true, Component: Inbox },
           { path: "chat", Component: Chat },
@@ -34,9 +32,9 @@ export const routes = [
               { path: "delete", Component: DeleteAccount },
             ],
           },
-          { path: "*", Component: PageNotFound },
         ],
       },
+      { path: "*", Component: PageNotFound },
     ],
   },
 ];
