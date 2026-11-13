@@ -79,7 +79,7 @@ export default function Signup() {
           </div>
         </div>
         <div className={btnStyles.btnPanel}>
-          <SecondaryButton text="Back" url=".." />
+          <SecondaryButton text="Back" url="/" />
           <button className={btnStyles.buttonPrimary}>Sign Up</button>
         </div>
       </form>

@@ -73,7 +73,7 @@ export default function Login() {
           </div>
         </div>
         <div className={btnStyles.btnPanel}>
-          <SecondaryButton text="Back" url=".." />
+          <SecondaryButton text="Back" url="/" />
           <button className={btnStyles.buttonPrimary}>Log In</button>
         </div>
       </form>

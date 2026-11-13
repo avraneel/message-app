@@ -9,10 +9,10 @@ export default function Home() {
       <Logo />
       <h1>Message App</h1>
       <div className={styles.buttonPanel}>
-        <Link to="signup" className={btnStyles.buttonPrimary}>
+        <Link to="/auth/signup" className={btnStyles.buttonPrimary}>
           Sign Up
         </Link>
-        <Link to="login" className={btnStyles.buttonPrimary}>
+        <Link to="/auth/login" className={btnStyles.buttonPrimary}>
           Login
         </Link>
       </div>

@@ -16,8 +16,13 @@ export const routes = [
     Component: Root,
     children: [
       { index: true, Component: Home },
-      { path: "signup", Component: Signup },
-      { path: "login", Component: Login },
+      {
+        path: "auth",
+        children: [
+          { path: "signup", Component: Signup },
+          { path: "login", Component: Login },
+        ],
+      },
       {
         path: "users/:username",
         children: [
