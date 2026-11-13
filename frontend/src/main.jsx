@@ -3,13 +3,14 @@ import { createRoot } from "react-dom/client";
 import "./css/reset.css";
 import "@fontsource-variable/quicksand";
 import "./css/index.css";
-import { BrowserRouter } from "react-router";
+import { createBrowserRouter } from "react-router";
+import { RouterProvider } from "react-router/dom";
 import { routes } from "./routes";
 
-const root = document.getElementById("root");
+const router = createBrowserRouter(routes);
 
-createRoot(root).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>{routes}</BrowserRouter>
+    <RouterProvider router={router} />
   </StrictMode>,
 );

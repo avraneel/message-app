@@ -13,7 +13,7 @@ export function restrict(req, res, next) {
   next();
 }
 
-/** Middleware to forbid the user with session cookie to modify
+/** Middleware to forbid a user with session cookie to modify
  * another user's data */
 export function forbid(req, res, next) {
   if (Number(req.params.id) !== req.user.id) {
