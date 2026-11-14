@@ -1,9 +1,10 @@
 import { Router } from "express";
 import prisma from "../lib/prisma.js";
+import { restrict } from "../restrict.js";
 
 const messageRoutes = Router({ mergeParams: true });
 
-messageRoutes.get("/:toUserId", async (req, res) => {
+messageRoutes.get("/:toUserId", restrict, messageForbid, async (req, res) => {
   const { userId, toUserId } = req.params;
   try {
     const messages = await prisma.message.findMany({
@@ -41,7 +42,7 @@ messageRoutes.get("/:toUserId", async (req, res) => {
   }
 });
 
-messageRoutes.post("/", async (req, res) => {
+messageRoutes.post("/", restrict, async (req, res) => {
   const { from, to, text } = req.body;
   await prisma.message.create({
     data: {
@@ -51,7 +52,49 @@ messageRoutes.post("/", async (req, res) => {
       text,
     },
   });
-  res.status(201).json({ message: "message created" });
+  const messages = await prisma.message.findMany({
+    where: {
+      OR: [
+        {
+          AND: [
+            {
+              fromUserId: from,
+            },
+            {
+              toUserId: to,
+            },
+          ],
+        },
+        {
+          AND: [
+            {
+              fromUserId: to,
+            },
+            {
+              toUserId: from,
+            },
+          ],
+        },
+      ],
+    },
+    orderBy: {
+      time: "asc",
+    },
+  });
+  res.status(201).json(messages);
 });
+
+/** Middle for 403 for message routes only, as the param name is userId
+ * and not id (in case of user routes)
+ */
+function messageForbid(req, res, next) {
+  if (Number(req.params.userId) !== req.user.id) {
+    return res
+      .status(403)
+      .json({ message: "You are forbidden to perform this action" });
+  } else {
+    next();
+  }
+}
 
 export default messageRoutes;

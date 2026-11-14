@@ -14,7 +14,7 @@ export function AuthProvider({ children }) {
       try {
         const response = await fetch(`${url}/id`, { credentials: "include" });
         if (!response.ok) {
-          throw new Error(`Response status code: ${response.status}`);
+          throw new Error(`auth id status code: ${response.status}`);
         }
         const data = await response.json();
         setLoggedInUser({

@@ -1,13 +1,15 @@
 import styles from "../css/Messages.module.css";
+import { useAuth } from "./useAuth";
 
-export default function Messages({ username, messages }) {
-  const messageElements = messages.map((el, ind) => {
-    if (el.sender === username) {
+export default function Messages({ messages }) {
+  const [loggedInUser] = useAuth();
+  const messageElements = messages.map((el) => {
+    if (el.fromUserId === loggedInUser.loggedInUserId) {
       // our sent message
-      return <BubbleSent key={ind} text={el.text} />;
+      return <BubbleSent key={el.id} text={el.text} />;
     } else {
       // their message
-      return <BubbleReceived key={ind} text={el.text} />;
+      return <BubbleReceived key={el.id} text={el.text} />;
     }
   });
   return <div className={styles.messageWindow}>{messageElements}</div>;

@@ -16,6 +16,8 @@
 }
 
 .sent {
+  color: var(--txt);
+  background-color: var(--cool-horizon);
   text-align: right;
   justify-self: end;
 }

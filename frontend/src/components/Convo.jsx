@@ -5,7 +5,7 @@ export default function Convo({ name }) {
   return (
     <li className={styles.convo}>
       <p>{name}</p>
-      <GoArrow />
+      <GoArrow user2Name={name} />
     </li>
   );
 }

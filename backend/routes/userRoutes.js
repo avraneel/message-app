@@ -87,6 +87,7 @@ userRoutes.get("/:id/contacts", restrict, forbid, async (req, res) => {
       },
     },
     select: {
+      id: true,
       username: true,
     },
   });

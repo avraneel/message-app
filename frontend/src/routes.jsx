@@ -31,7 +31,7 @@ export const routes = [
         Component: RequireAuth,
         children: [
           { index: true, Component: Inbox },
-          { path: "chat", Component: Chat },
+          { path: "chat/:user2", Component: Chat },
           {
             path: "settings",
             children: [
