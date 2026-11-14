@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import SecondaryButton from "./buttons/SecondaryButton";
 import styles from "../css/Settings.module.css";
 import btnStyles from "../css/Button.module.css";
@@ -6,7 +6,6 @@ import url from "../globals";
 import { useAuth } from "./useAuth";
 
 export default function Settings() {
-  let navigate = useNavigate();
   const [, setLoggedInUser] = useAuth();
   async function logout() {
     const headers = new Headers({
