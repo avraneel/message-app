@@ -9,6 +9,8 @@ import ChangePassword from "./components/ChangePassword.jsx";
 import DeleteAccount from "./components/DeleteAccount.jsx";
 import Chat from "./components/Chat.jsx";
 import PageNotFound from "./components/PageNotFound.jsx";
+import NotRequireAuth from "./components/NotRequireAuth.jsx";
+import RequireAuth from "./components/RequireAuth.jsx";
 
 export const routes = [
   {
@@ -18,6 +20,7 @@ export const routes = [
       { index: true, Component: Home },
       {
         path: "auth",
+        Component: NotRequireAuth,
         children: [
           { path: "signup", Component: Signup },
           { path: "login", Component: Login },
@@ -25,6 +28,7 @@ export const routes = [
       },
       {
         path: "users/:username",
+        Component: RequireAuth,
         children: [
           { index: true, Component: Inbox },
           { path: "chat", Component: Chat },

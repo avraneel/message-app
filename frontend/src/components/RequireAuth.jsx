@@ -1,28 +1,20 @@
-import { useEffect, useState } from "react";
-import { Outlet, redirect } from "react-router";
+import { useEffect } from "react";
+import { useNavigate, Outlet } from "react-router";
+import { useAuth } from "./useAuth";
 
-/** This is a like pit stop basically, since outletcontext only works on immediate children */
 export default function RequireAuth() {
-  const [userId, setUserId] = useState(0);
+  const navigate = useNavigate();
+  const context = useAuth();
 
   useEffect(() => {
-    async function loadId() {
-      const response = await fetchId();
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-      const { userId } = await response.json();
-      setUserId(userId);
+    if (context.loggedInUserId <= 0) {
+      navigate(`/`);
     }
+  }, [context, navigate]);
 
-    loadId();
-  }, []);
-
-  const isAuthenticated = true;
-
-  if (!isAuthenticated) {
-    return redirect("login");
+  if (context.loggedInUserId > 0) {
+    return <Outlet />;
+  } else {
+    return null;
   }
-
-  return <Outlet context={userId} />;
 }

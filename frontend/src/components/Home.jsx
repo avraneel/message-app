@@ -1,21 +1,36 @@
 import Logo from "./Logo";
 import styles from "../css/Home.module.css";
 import btnStyles from "../css/Button.module.css";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useAuth } from "./useAuth";
+import { useEffect } from "react";
 
 export default function Home() {
-  return (
-    <main className={styles.home}>
-      <Logo />
-      <h1>Message App</h1>
-      <div className={styles.buttonPanel}>
-        <Link to="/auth/signup" className={btnStyles.buttonPrimary}>
-          Sign Up
-        </Link>
-        <Link to="/auth/login" className={btnStyles.buttonPrimary}>
-          Login
-        </Link>
-      </div>
-    </main>
-  );
+  const navigate = useNavigate();
+  const context = useAuth();
+  console.log(context);
+  useEffect(() => {
+    if (context.loggedInUserId > 0) {
+      navigate(`users/${context.loggedInUsername}`);
+    }
+  }, [context, navigate]);
+
+  if (context.loggedInUserId <= 0) {
+    return (
+      <main className={styles.home}>
+        <Logo />
+        <h1>Message App</h1>
+        <div className={styles.buttonPanel}>
+          <Link to="/auth/signup" className={btnStyles.buttonPrimary}>
+            Sign Up
+          </Link>
+          <Link to="/auth/login" className={btnStyles.buttonPrimary}>
+            Login
+          </Link>
+        </div>
+      </main>
+    );
+  } else {
+    return null;
+  }
 }
