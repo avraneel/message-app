@@ -15,7 +15,10 @@ export function AuthProvider({ children }) {
           throw new Error(`Response status code: ${response.status}`);
         }
         const data = await response.json();
-        setLoggedInUser(data);
+        setLoggedInUser({
+          loggedInUserId: data.userId,
+          loggedInUsername: data.username,
+        });
       } catch (err) {
         console.error(err);
       }
@@ -23,5 +26,9 @@ export function AuthProvider({ children }) {
     fetchId();
   }, []);
 
-  return <AuthContext value={loggedInUser}>{children}</AuthContext>;
+  return (
+    <AuthContext value={[loggedInUser, setLoggedInUser]}>
+      {children}
+    </AuthContext>
+  );
 }

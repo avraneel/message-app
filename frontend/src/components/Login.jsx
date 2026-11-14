@@ -4,10 +4,12 @@ import formStyles from "../css/Form.module.css";
 import Logo from "./Logo";
 import SecondaryButton from "./buttons/SecondaryButton";
 import url from "../globals";
+import { useAuth } from "./useAuth";
 
 export default function Login() {
   let navigate = useNavigate();
-
+  const [, setLoggedInUser] = useAuth();
+  console.log("render");
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -37,9 +39,10 @@ export default function Login() {
         throw new Error(`Response status: ${response.status}`);
       }
       const { user } = await response.json();
-      // lifing state up
-      localStorage.setItem("userId", JSON.stringify(user.id));
-      navigate(`/users/${user.username}`);
+      setLoggedInUser({
+        loggedInUserId: user.id,
+        loggedInUsername: user.username,
+      });
     } catch (err) {
       console.error(err);
     }

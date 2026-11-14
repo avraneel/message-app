@@ -4,15 +4,15 @@ import { useAuth } from "./useAuth";
 
 export default function NotRequireAuth() {
   const navigate = useNavigate();
-  const context = useAuth();
+  const [loggedInUser] = useAuth();
 
   useEffect(() => {
-    if (context.loggedInUserId > 0) {
-      navigate(`/users/${context.loggedInUsername}`);
+    if (loggedInUser.loggedInUserId > 0) {
+      navigate(`/users/${loggedInUser.loggedInUsername}`);
     }
-  }, [context, navigate]);
+  }, [loggedInUser, navigate]);
 
-  if (context.loggedInUserId <= 0) {
+  if (loggedInUser.loggedInUserId <= 0) {
     return <Outlet />;
   } else {
     return null;

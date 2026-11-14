@@ -7,15 +7,14 @@ import { useEffect } from "react";
 
 export default function Home() {
   const navigate = useNavigate();
-  const context = useAuth();
-  console.log(context);
+  const [loggedInUser] = useAuth();
   useEffect(() => {
-    if (context.loggedInUserId > 0) {
-      navigate(`users/${context.loggedInUsername}`);
+    if (loggedInUser.loggedInUserId > 0) {
+      navigate(`users/${loggedInUser.loggedInUsername}`);
     }
-  }, [context, navigate]);
+  }, [loggedInUser, navigate]);
 
-  if (context.loggedInUserId <= 0) {
+  if (loggedInUser.loggedInUserId <= 0) {
     return (
       <main className={styles.home}>
         <Logo />
