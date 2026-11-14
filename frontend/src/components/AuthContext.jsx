@@ -7,6 +7,8 @@ export function AuthProvider({ children }) {
     loggedInUserId: 0,
     loggedInUsername: "",
   });
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     async function fetchId() {
       try {
@@ -21,13 +23,15 @@ export function AuthProvider({ children }) {
         });
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     }
     fetchId();
   }, []);
 
   return (
-    <AuthContext value={[loggedInUser, setLoggedInUser]}>
+    <AuthContext value={[loggedInUser, setLoggedInUser, isLoading]}>
       {children}
     </AuthContext>
   );

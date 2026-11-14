@@ -4,13 +4,12 @@ import { useAuth } from "./useAuth";
 
 export default function RequireAuth() {
   const navigate = useNavigate();
-  const [loggedInUser] = useAuth();
-
+  const [loggedInUser, , isLoading] = useAuth();
   useEffect(() => {
-    if (loggedInUser.loggedInUserId <= 0) {
+    if (loggedInUser.loggedInUserId <= 0 && !isLoading) {
       navigate(`/`);
     }
-  }, [loggedInUser, navigate]);
+  }, [loggedInUser, navigate, isLoading]);
 
   if (loggedInUser.loggedInUserId > 0) {
     return <Outlet />;
