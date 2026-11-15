@@ -2,7 +2,11 @@ import { Router } from "express";
 import bcrypt from "bcryptjs";
 import prisma from "../lib/prisma.js";
 import { restrict, forbid } from "../restrict.js";
-import { createUser, doesUsernameExist } from "../userOperations.js";
+import {
+  createUser,
+  deleteUser,
+  doesUsernameExist,
+} from "../db/userOperations.js";
 
 const userRoutes = Router();
 
@@ -24,9 +28,7 @@ userRoutes.post("/", async (req, res) => {
 
 /** Deletes a user */
 userRoutes.delete("/:id", restrict, forbid, async (req, res) => {
-  await prisma.user.delete({
-    where: { id: Number(req.params.id) },
-  });
+  await deleteUser(Number(req.params.id));
   req.logOut((err) => {
     if (err) {
       return next(err);
@@ -62,11 +64,13 @@ userRoutes.put("/:id/username", restrict, forbid, async (req, res) => {
 /** Updates a user's password */
 userRoutes.put("/:id/password", restrict, forbid, async (req, res) => {
   const { newPassword } = req.body;
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
   const { id } = req.user;
   await prisma.user.update({
     where: { id },
-    data: { password: newPassword },
+    data: { password: hashedPassword },
   });
+
   res.status(200).json({ message: "password updated" });
 });
 
