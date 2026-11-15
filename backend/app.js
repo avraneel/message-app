@@ -40,9 +40,4 @@ app.use(passport.session());
 
 app.use("/", router);
 
-app.listen(process.env.PORT, (err) => {
-  if (err) {
-    throw err;
-  }
-  console.log(`listening on port ${process.env.PORT}...`);
-});
+export default app;

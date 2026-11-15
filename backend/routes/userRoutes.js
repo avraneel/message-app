@@ -14,9 +14,9 @@ const userRoutes = Router();
 userRoutes.post("/", async (req, res) => {
   const { username, password } = req.body;
   try {
-    if (!doesUsernameExist(username)) {
+    if (!(await doesUsernameExist(username))) {
       const hashedPassword = await bcrypt.hash(password, 10);
-      const user = createUser(username, hashedPassword);
+      const user = await createUser(username, hashedPassword);
       res.status(201).send(user);
     } else {
       res.status(409).json({ message: "user already exists" });
