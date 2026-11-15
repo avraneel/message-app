@@ -2,6 +2,7 @@ import { Router } from "express";
 import bcrypt from "bcryptjs";
 import prisma from "../lib/prisma.js";
 import { restrict, forbid } from "../restrict.js";
+import { createUser, doesUsernameExist } from "../userOperations.js";
 
 const userRoutes = Router();
 
@@ -9,20 +10,12 @@ const userRoutes = Router();
 userRoutes.post("/", async (req, res) => {
   const { username, password } = req.body;
   try {
-    const existingUser = await prisma.user.findUnique({
-      where: { username },
-    });
-    if (existingUser) {
-      res.status(409).json({ message: "user already exists" });
-    } else {
+    if (!doesUsernameExist(username)) {
       const hashedPassword = await bcrypt.hash(password, 10);
-      await prisma.user.create({
-        data: {
-          username,
-          password: hashedPassword,
-        },
-      });
-      res.status(201).send({ message: "user created" });
+      const user = createUser(username, hashedPassword);
+      res.status(201).send(user);
+    } else {
+      res.status(409).json({ message: "user already exists" });
     }
   } catch (err) {
     console.log(err);
@@ -52,11 +45,15 @@ userRoutes.put("/:id/username", restrict, forbid, async (req, res) => {
   const { newUsername } = req.body;
   const { id } = req.user;
   try {
-    await prisma.user.update({
-      where: { id },
-      data: { username: newUsername },
-    });
-    res.status(200).json({ message: "username updated" });
+    if (!(await doesUsernameExist(newUsername))) {
+      const user = await prisma.user.update({
+        where: { id },
+        data: { username: newUsername },
+      });
+      res.status(200).json(user);
+    } else {
+      res.status(409).json({ message: "user already exists" });
+    }
   } catch (err) {
     console.error(err);
   }
