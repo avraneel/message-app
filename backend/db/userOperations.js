@@ -14,10 +14,16 @@ export async function createUser(username, password) {
   }
 }
 
-export async function deleteUser(id) {
+export async function deleteUser(userId) {
   try {
-    const user = await prisma.user.delete({ where: { id } });
-    return user;
+    await prisma.$transaction([
+      prisma.message.deleteMany({ where: { fromUserId: userId } }),
+      prisma.message.updateMany({
+        where: { toUserId: userId },
+        data: { toUserId: 0 },
+      }),
+      prisma.user.delete({ where: { id: userId } }),
+    ]);
   } catch (err) {
     console.error(err);
   }
