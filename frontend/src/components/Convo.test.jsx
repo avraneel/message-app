@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import Convo from "../components/Convo";
+import Convo from "./Convo";
 import { MemoryRouter } from "react-router";
-import { AuthProvider } from "../components/AuthContext";
+import { AuthProvider } from "./AuthContext";
 
 beforeEach(() => {
   render(

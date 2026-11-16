@@ -1,8 +1,8 @@
 import { beforeEach, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import Login from "../components/Login";
+import Login from "./Login";
 import { MemoryRouter } from "react-router";
-import { AuthProvider } from "../components/AuthContext";
+import { AuthProvider } from "./AuthContext";
 
 beforeEach(() => {
   render(

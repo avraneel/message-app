@@ -1,8 +1,8 @@
 import { describe, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import Inbox from "../components/Inbox";
+import Inbox from "./Inbox";
 import { MemoryRouter } from "react-router";
-import { AuthProvider } from "../components/AuthContext";
+import { AuthProvider } from "./AuthContext";
 
 describe("Inbox Component", () => {
   test("shows the heading", () => {
