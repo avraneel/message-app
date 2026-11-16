@@ -29,6 +29,8 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.29.7",
-    "prisma": "^7.10.0"
+    "prisma": "^7.10.0",
+    "supertest": "^7.3.2",
+    "vitest": "^5.1.0"
   }
 }

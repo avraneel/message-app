@@ -20,6 +20,6 @@ describe("Convo Component", () => {
   });
 
   test("displays the button", () => {
-    expect(screen.getByRole("button", { name: /go/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /go/i })).toBeInTheDocument();
   });
 });

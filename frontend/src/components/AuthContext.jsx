@@ -21,10 +21,9 @@ export function AuthProvider({ children }) {
           loggedInUserId: data.userId,
           loggedInUsername: data.username,
         });
+        setIsLoading(false);
       } catch (err) {
         console.error(err);
-      } finally {
-        setIsLoading(false);
       }
     }
     fetchId();

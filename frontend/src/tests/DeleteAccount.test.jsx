@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import DeleteAccount from "../components/DeleteAccount";
 import { MemoryRouter } from "react-router";
 import { AuthProvider } from "../components/AuthContext";
+import { waitFor } from "@testing-library/react";
 
 const username = "mockuser";
 
@@ -23,8 +24,8 @@ describe("DeleteAccount", () => {
     ).toBeInTheDocument();
   });
 
-  test("displays the username", () => {
-    expect(screen.getByText(username)).toBeInTheDocument();
+  test("displays the username", async () => {
+    await waitFor(expect(screen.getByText(username)).toBeInTheDocument());
   });
 
   test("displays the Submit button and Back Link", () => {
