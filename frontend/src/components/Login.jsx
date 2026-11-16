@@ -7,7 +7,7 @@ import { useAuth } from "./useAuth";
 
 export default function Login() {
   const [, setLoggedInUser] = useAuth();
-  console.log("render");
+
   async function handleSubmit(e) {
     e.preventDefault();
 
