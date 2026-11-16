@@ -5,11 +5,11 @@ import cogSvgUrl from "../assets/cog.svg";
 
 export default function Inbox() {
   const contacts = useOutletContext();
-  const convoElements = contacts.map((el, ind) => (
-    <Convo name={el.username} key={ind} />
-  ));
 
   if (contacts) {
+    const convoElements = contacts.map((el, ind) => (
+      <Convo name={el.username} key={ind} />
+    ));
     return (
       <div className={styles.inbox}>
         <TopbarInbox />
@@ -17,7 +17,11 @@ export default function Inbox() {
       </div>
     );
   } else {
-    return null;
+    return (
+      <div className={styles.inbox}>
+        <TopbarInbox />
+      </div>
+    );
   }
 }
 
