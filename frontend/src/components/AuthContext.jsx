@@ -29,7 +29,7 @@ export function AuthProvider({ children }) {
     }
     fetchId();
   }, []);
-  console.log(loggedInUser);
+
   return (
     <AuthContext value={[loggedInUser, setLoggedInUser, isLoading]}>
       {children}

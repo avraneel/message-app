@@ -1,33 +1,33 @@
-import { expect } from "vitest";
+import { beforeEach, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import DeleteAccount from "../components/DeleteAccount";
 import { MemoryRouter } from "react-router";
+import { AuthProvider } from "../components/AuthContext";
 
 const username = "mockuser";
 
-function renderDeleteAccount() {
-  return render(
+beforeEach(() => {
+  render(
     <MemoryRouter>
-      <DeleteAccount username={username} />
+      <AuthProvider>
+        <DeleteAccount />
+      </AuthProvider>
     </MemoryRouter>,
   );
-}
+});
 
-describe("Login Component", () => {
+describe("DeleteAccount", () => {
   test("displays the correct title", () => {
-    renderDeleteAccount();
     expect(
       screen.getByRole("heading", { name: /delete account/i }),
     ).toBeInTheDocument();
   });
 
   test("displays the username", () => {
-    renderDeleteAccount();
     expect(screen.getByText(username)).toBeInTheDocument();
   });
 
   test("displays the Submit button and Back Link", () => {
-    renderDeleteAccount();
     expect(
       screen.getByRole("link", { name: /no, go back/i }),
     ).toBeInTheDocument();

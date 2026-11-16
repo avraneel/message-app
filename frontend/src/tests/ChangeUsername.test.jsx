@@ -1,26 +1,27 @@
-import { expect } from "vitest";
+import { beforeEach, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import ChangeUsername from "../components/ChangeUsername";
 import { MemoryRouter } from "react-router";
+import { AuthProvider } from "../components/AuthContext";
 
-function renderChangeUsername() {
-  return render(
+beforeEach(() => {
+  render(
     <MemoryRouter>
-      <ChangeUsername />
+      <AuthProvider>
+        <ChangeUsername />
+      </AuthProvider>
     </MemoryRouter>,
   );
-}
+});
 
-describe("Login Component", () => {
+describe("Change Username Component", () => {
   test("displays the correct title", () => {
-    renderChangeUsername();
     expect(
       screen.getByRole("heading", { name: /change username/i }),
     ).toBeInTheDocument();
   });
 
   test("displays the old username input field", () => {
-    renderChangeUsername();
     const oldUsername = screen.getByLabelText("Old Username *");
     expect(oldUsername).toBeVisible();
     expect(oldUsername).toBeRequired();
@@ -29,7 +30,6 @@ describe("Login Component", () => {
   });
 
   test("displays the new username input field", () => {
-    renderChangeUsername();
     const newUsername = screen.getByLabelText("New Username *");
     expect(newUsername).toBeVisible();
     expect(newUsername).toBeRequired();
@@ -38,7 +38,6 @@ describe("Login Component", () => {
   });
 
   test("displays the Submit button and Back Link", () => {
-    renderChangeUsername();
     expect(screen.getByRole("link", { name: /back/i })).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /change username/i }),
@@ -46,7 +45,6 @@ describe("Login Component", () => {
   });
 
   test("display only 2 input fields", () => {
-    renderChangeUsername();
     const inputs = document.querySelectorAll("input");
     expect(inputs).toHaveLength(2);
   });

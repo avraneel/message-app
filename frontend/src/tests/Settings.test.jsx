@@ -1,19 +1,21 @@
-import { describe, expect } from "vitest";
+import { beforeEach, describe, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Settings from "../components/Settings";
 import { MemoryRouter } from "react-router";
+import { AuthProvider } from "../components/AuthContext";
 
-function renderSettings() {
-  return render(
+beforeEach(() => {
+  render(
     <MemoryRouter>
-      <Settings />
+      <AuthProvider>
+        <Settings />
+      </AuthProvider>
     </MemoryRouter>,
   );
-}
+});
 
-describe("settings component", () => {
+describe("Settings component", () => {
   test("renders all three items", () => {
-    renderSettings();
     expect(
       screen.getByRole("link", { name: /change username/i }),
     ).toBeInTheDocument();

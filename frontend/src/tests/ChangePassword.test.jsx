@@ -1,26 +1,27 @@
-import { expect } from "vitest";
+import { beforeEach, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import ChangePassword from "../components/ChangePassword";
 import { MemoryRouter } from "react-router";
+import { AuthProvider } from "../components/AuthContext";
 
-function renderChangePasword() {
-  return render(
+beforeEach(() => {
+  render(
     <MemoryRouter>
-      <ChangePassword />
+      <AuthProvider>
+        <ChangePassword />
+      </AuthProvider>
     </MemoryRouter>,
   );
-}
+});
 
-describe("Login Component", () => {
+describe("Change Password Component", () => {
   test("displays the correct title", () => {
-    renderChangePasword();
     expect(
       screen.getByRole("heading", { name: /change password/i }),
     ).toBeInTheDocument();
   });
 
   test("displays the old password input field", () => {
-    renderChangePasword();
     const oldPassword = screen.getByLabelText("Old Password *");
     expect(oldPassword).toBeVisible();
     expect(oldPassword).toBeRequired();
@@ -29,7 +30,6 @@ describe("Login Component", () => {
   });
 
   test("displays the new password input field", () => {
-    renderChangePasword();
     const newUsername = screen.getByLabelText("New Password *");
     expect(newUsername).toBeVisible();
     expect(newUsername).toBeRequired();
@@ -38,7 +38,6 @@ describe("Login Component", () => {
   });
 
   test("displays the confirm password input field", () => {
-    renderChangePasword();
     const newUsername = screen.getByLabelText("Confirm Password *");
     expect(newUsername).toBeVisible();
     expect(newUsername).toBeRequired();
@@ -47,7 +46,6 @@ describe("Login Component", () => {
   });
 
   test("displays the Submit button and Back Link", () => {
-    renderChangePasword();
     expect(screen.getByRole("link", { name: /back/i })).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /change password/i }),
@@ -55,7 +53,6 @@ describe("Login Component", () => {
   });
 
   test("display only 3 input fields", () => {
-    renderChangePasword();
     const inputs = document.querySelectorAll("input");
     expect(inputs).toHaveLength(3);
   });

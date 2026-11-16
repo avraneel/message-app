@@ -47,7 +47,7 @@ export default function ChangePassword() {
         onSubmit={handleSubmit}
       >
         <div className={formStyles.formBody}>
-          {/* <div className={formStyles.formItem}>
+          <div className={formStyles.formItem}>
             <label htmlFor="old-password">Old Password *</label>
             <input
               type="password"
@@ -56,7 +56,7 @@ export default function ChangePassword() {
               className={formStyles.inputElement}
               required
             />
-          </div> */}
+          </div>
           <div className={formStyles.formItem}>
             <label htmlFor="new-password">New Password *</label>
             <input
@@ -69,7 +69,7 @@ export default function ChangePassword() {
               required
             />
           </div>
-          {/* <div className={formStyles.formItem}>
+          <div className={formStyles.formItem}>
             <label htmlFor="confirm-password">Confirm Password *</label>
             <input
               type="password"
@@ -78,7 +78,7 @@ export default function ChangePassword() {
               className={formStyles.inputElement}
               required
             />
-          </div> */}
+          </div>
         </div>
         <div className={btnStyles.btnPanel}>
           <SecondaryButton text="Back" url=".." />

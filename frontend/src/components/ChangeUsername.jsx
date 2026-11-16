@@ -49,6 +49,16 @@ export default function ChangeUsername() {
       >
         <div className={formStyles.formBody}>
           <div className={formStyles.formItem}>
+            <label htmlFor="old-username">Old Username *</label>
+            <input
+              type="text"
+              name="old-username"
+              id="old-username"
+              className={formStyles.inputElement}
+              required
+            />
+          </div>
+          <div className={formStyles.formItem}>
             <label htmlFor="new-username">New Username *</label>
             <input
               type="text"
