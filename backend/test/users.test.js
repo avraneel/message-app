@@ -7,6 +7,7 @@ import bcrypt from "bcryptjs";
 beforeEach(async () => {
   await prisma.$transaction([
     prisma.message.deleteMany(),
+    prisma.session.deleteMany(),
     prisma.user.deleteMany(),
   ]);
 });
@@ -45,6 +46,24 @@ describe("/users route", () => {
         .send({ newUsername: "bob" });
       expect(putReponse.status).toBe(401);
     });
+
+    test("updates username with 200 with valid cookie", async () => {
+      const registerResponse = await request(app)
+        .post("/users")
+        .send({ username: "alice", password: "123" });
+      expect(registerResponse.status).toBe(201);
+      const loginResponse = await request(app).post("/login").send({
+        username: "alice",
+        password: "123",
+      });
+      expect(loginResponse.status).toBe(200);
+      const cookie = loginResponse.headers["set-cookie"];
+      const putReponse = await request(app)
+        .put(`/users/${loginResponse.body.user.id}/username`)
+        .set("Cookie", [cookie])
+        .send({ newUsername: "bob" });
+      expect(putReponse.status).toBe(200);
+    });
   });
 
   describe("PUT /users/:username/password", () => {
@@ -53,6 +72,28 @@ describe("/users route", () => {
         .post("/users")
         .send({ username: "alice", password: "123" });
       expect(registerResponse.status).toBe(201);
+      const putReponse = await request(app)
+        .put("/users/alice/username")
+        .send({ newPassword: "1234" });
+      expect(putReponse.status).toBe(401);
+    });
+
+    test("updates password with 200 with valid cookie", async () => {
+      const registerResponse = await request(app)
+        .post("/users")
+        .send({ username: "alice", password: "123" });
+      expect(registerResponse.status).toBe(201);
+      const loginResponse = await request(app).post("/login").send({
+        username: "alice",
+        password: "123",
+      });
+      expect(loginResponse.status).toBe(200);
+      const cookie = loginResponse.headers["set-cookie"];
+      const putReponse = await request(app)
+        .put(`/users/${loginResponse.body.user.id}/password`)
+        .set("Cookie", [cookie])
+        .send({ newPassword: "1234" });
+      expect(putReponse.status).toBe(200);
     });
   });
 });
