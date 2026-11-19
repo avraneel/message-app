@@ -9,14 +9,13 @@ beforeEach(async () => {
     prisma.session.deleteMany(),
     prisma.user.deleteMany(),
   ]);
+  await request(app)
+    .post("/users")
+    .send({ username: "alice", password: "123" });
 });
 
 describe("/login route", () => {
   test("returns a cookie on successful login", async () => {
-    const registerResponse = await request(app)
-      .post("/users")
-      .send({ username: "alice", password: "123" });
-    expect(registerResponse.status).toBe(201);
     const response = await request(app)
       .post("/login")
       .send({ username: "alice", password: "123" });
@@ -25,10 +24,6 @@ describe("/login route", () => {
   });
 
   test("returns 401 on unsuccessful login", async () => {
-    const registerResponse = await request(app)
-      .post("/users")
-      .send({ username: "alice", password: "123" });
-    expect(registerResponse.status).toBe(201);
     const response = await request(app)
       .post("/login")
       .send({ username: "alice", password: "1234" });
@@ -36,17 +31,16 @@ describe("/login route", () => {
   });
 });
 
-test("gets userId from cookie", async () => {
-  await request(app)
-    .post("/users")
-    .send({ username: "alice", password: "123" });
-  const loginResponse = await request(app)
-    .post("/login")
-    .send({ username: "alice", password: "123" });
-  const cookie = loginResponse.headers["set-cookie"];
-  const getUserIdResponse = await request(app)
-    .get("/id")
-    .set("Cookie", [cookie]);
-  expect(getUserIdResponse.status).toBe(200);
-  expect(getUserIdResponse.body.userId).toBeGreaterThan(0);
+describe("id route", () => {
+  test("gets userId from cookie", async () => {
+    const loginResponse = await request(app)
+      .post("/login")
+      .send({ username: "alice", password: "123" });
+    const cookie = loginResponse.headers["set-cookie"];
+    const getUserIdResponse = await request(app)
+      .get("/id")
+      .set("Cookie", cookie);
+    expect(getUserIdResponse.status).toBe(200);
+    expect(getUserIdResponse.body.userId).toBeGreaterThan(0);
+  });
 });

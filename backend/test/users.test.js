@@ -73,7 +73,7 @@ describe("/users route", () => {
         .send({ username: "alice", password: "123" });
       expect(registerResponse.status).toBe(201);
       const putReponse = await request(app)
-        .put("/users/alice/username")
+        .put("/users/alice/password")
         .send({ newPassword: "1234" });
       expect(putReponse.status).toBe(401);
     });
@@ -97,7 +97,7 @@ describe("/users route", () => {
     });
 
     describe("GET routes", () => {
-      test("contact route", async () => {
+      test("/contact route", async () => {
         await request(app)
           .post("/users")
           .send({ username: "alice", password: "123" });
@@ -128,6 +128,20 @@ describe("/users route", () => {
           "cat",
           "delta",
         ]);
+      });
+      test("/:id route", async () => {
+        await request(app)
+          .post("/users")
+          .send({ username: "alice", password: "123" });
+        const loginResponse = await request(app).post("/login").send({
+          username: "alice",
+          password: "123",
+        });
+        const cookie = loginResponse.headers["set-cookie"];
+        const getReponse = await request(app)
+          .get(`/users/${loginResponse.body.user.id}/contacts`)
+          .set("Cookie", [cookie]);
+        expect(getReponse.status).toBe(200);
       });
     });
   });
