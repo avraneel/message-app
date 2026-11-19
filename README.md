@@ -9,3 +9,8 @@
 | `/users/:id`                 | PUT    | Only same user | Update username/password      |
 | `/users/:id`                 | DELETE | Only same user | Deletes a user + messages     |
 | `/user/:userId/messages/:id` | Get    | Only `:userId` | Gets the chat with `:id`      |
+
+## TODO
+
+- [ ] Delete all sessions on deleting user
+- [ ] mock fetch

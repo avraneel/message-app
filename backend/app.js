@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import cookieParser from "cookie-parser";
 import session from "express-session";
 import prisma from "./lib/prisma.js";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
@@ -8,6 +9,7 @@ import passport from "./lib/passport.js";
 import router from "./routes/index.js";
 
 const app = express();
+app.use(cookieParser());
 
 app.use(
   cors({

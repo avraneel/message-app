@@ -1,10 +1,23 @@
-import { beforeEach, expect } from "vitest";
+import { afterEach, beforeEach, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Login from "./Login";
 import { MemoryRouter } from "react-router";
 import { AuthProvider } from "./AuthContext";
+import userEvent from "@testing-library/user-event";
+
+const mockFetch = vi.fn().mockResolvedValueOnce({
+  ok: true,
+  status: 200,
+  json: {
+    username: "Alice",
+    passwd: "hash",
+  },
+});
+
+global.fetch = mockFetch;
 
 beforeEach(() => {
+  mockFetch.mockClear();
   render(
     <MemoryRouter>
       <AuthProvider>
@@ -12,6 +25,10 @@ beforeEach(() => {
       </AuthProvider>
     </MemoryRouter>,
   );
+});
+
+afterEach(() => {
+  vi.clearAllMocks();
 });
 
 describe("Login Component", () => {
@@ -42,5 +59,10 @@ describe("Login Component", () => {
   test("display only 2 input fields", () => {
     const inputs = document.querySelectorAll("input");
     expect(inputs).toHaveLength(2);
+  });
+
+  test("fetch is called once", async () => {
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: /log in/i }));
   });
 });
