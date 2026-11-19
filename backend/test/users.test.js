@@ -95,5 +95,40 @@ describe("/users route", () => {
         .send({ newPassword: "1234" });
       expect(putReponse.status).toBe(200);
     });
+
+    describe("GET routes", () => {
+      test("contact route", async () => {
+        await request(app)
+          .post("/users")
+          .send({ username: "alice", password: "123" });
+        await request(app)
+          .post("/users")
+          .send({ username: "bob", password: "123" });
+        await request(app)
+          .post("/users")
+          .send({ username: "cat", password: "123" });
+        await request(app)
+          .post("/users")
+          .send({ username: "delta", password: "123" });
+        await request(app)
+          .post("/users")
+          .send({ username: "delta", password: "123" });
+        const loginResponse = await request(app).post("/login").send({
+          username: "alice",
+          password: "123",
+        });
+        expect(loginResponse.status).toBe(200);
+        const cookie = loginResponse.headers["set-cookie"];
+        const getReponse = await request(app)
+          .get(`/users/${loginResponse.body.user.id}/contacts`)
+          .set("Cookie", [cookie]);
+        expect(getReponse.status).toBe(200);
+        expect(getReponse.body.map((el) => el.username)).toEqual([
+          "bob",
+          "cat",
+          "delta",
+        ]);
+      });
+    });
   });
 });
