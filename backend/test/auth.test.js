@@ -21,7 +21,7 @@ describe("/login route", () => {
       .post("/login")
       .send({ username: "alice", password: "123" });
     expect(response.status).toBe(200);
-    console.log(response.get("Set-Cookie"));
+    expect(response.get("Set-Cookie")).not.toBeNull();
   });
 
   test("returns 401 on unsuccessful login", async () => {
@@ -34,4 +34,19 @@ describe("/login route", () => {
       .send({ username: "alice", password: "1234" });
     expect(response.status).toBe(401);
   });
+});
+
+test("gets userId from cookie", async () => {
+  await request(app)
+    .post("/users")
+    .send({ username: "alice", password: "123" });
+  const loginResponse = await request(app)
+    .post("/login")
+    .send({ username: "alice", password: "123" });
+  const cookie = loginResponse.headers["set-cookie"];
+  const getUserIdResponse = await request(app)
+    .get("/id")
+    .set("Cookie", [cookie]);
+  expect(getUserIdResponse.status).toBe(200);
+  expect(getUserIdResponse.body.userId).toBeGreaterThan(0);
 });
