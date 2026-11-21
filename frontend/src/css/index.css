@@ -10,6 +10,13 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --regal-navy: #9abee7;
+    --txt: #263624;
+    --cool-horizon: #77b3ea;
+    --alabaster-grey: #303033;
+    --frosted-blue: #b2e1f4;
+    --deep-navy: #a6c1f8;
+    --pale-sky: #141b1f;
   }
 }
 
