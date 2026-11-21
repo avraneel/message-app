@@ -32,6 +32,6 @@
 
 .inputElement {
   border-radius: 0.5rem;
-  border: 1px solid var(--alabaster-grey);
+  border: 1px solid var(--received-bubble-bg);
   padding: 0.5rem 1rem;
 }

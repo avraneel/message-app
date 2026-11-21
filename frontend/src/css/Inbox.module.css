@@ -12,7 +12,7 @@
   align-items: center;
   text-align: center;
   padding: 1rem;
-  background-color: var(--regal-navy);
+  background-color: var(--primary-btn-bg);
   color: white;
 }
 

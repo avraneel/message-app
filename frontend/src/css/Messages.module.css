@@ -6,18 +6,20 @@
 
 .bubble {
   padding: 0.8rem;
-  background-color: var(--alabaster-grey);
   border-radius: 1rem;
 }
 
 .received {
   text-align: left;
+  background-color: var(--received-bubble-bg);
+  color: var(--received-bubble-txt);
   justify-self: start;
 }
 
 .sent {
-  color: var(--txt);
-  background-color: var(--cool-horizon);
+  color: var(--btn-txt);
+  background-color: var(--sent-bubble-bg);
+  color: var(--sent-bubble-txt);
   text-align: right;
   justify-self: end;
 }

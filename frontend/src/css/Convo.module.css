@@ -5,6 +5,7 @@
   align-items: center;
   gap: 2rem;
   padding: 2rem;
-  border: 1px solid var(--regal-navy);
+  border: 1px solid var(--primary-btn-bg);
+  color: var(--txt);
   border-radius: 1rem;
 }

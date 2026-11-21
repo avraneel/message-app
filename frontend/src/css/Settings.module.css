@@ -1,20 +1,20 @@
 .settings {
+  background-color: var(--settings-bg);
   display: grid;
   justify-content: center;
   align-content: start;
   gap: 2rem;
-  background-color: #bbe1f9;
   height: 100vh;
   padding: 2rem;
 }
 
 .settingsList {
+  background-color: var(--settings-list-bg);
   display: grid;
   justify-content: center;
   align-content: center;
   list-style-type: none;
   padding: 0.5rem;
-  background-color: white;
   border-radius: 1rem;
 }
 
@@ -26,6 +26,7 @@
 }
 
 .settingsListLink {
+  color: var(--settings-list-txt);
   text-decoration: none;
 }
 
@@ -46,4 +47,5 @@
 
 .heading {
   text-align: center;
+  color: var(--txt);
 }

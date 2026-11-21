@@ -1,6 +1,6 @@
 .buttonPrimary {
-  background-color: var(--regal-navy);
-  color: var(--txt);
+  background-color: var(--primary-btn-bg);
+  color: var(--primary-btn-txt);
   cursor: pointer;
   text-align: center;
   border: none;
@@ -10,10 +10,12 @@
 }
 
 .buttonPrimary:hover {
-  background-color: var(--cool-horizon);
+  background-color: var(--hover-btn-bg);
 }
 
 .buttonSecondary {
+  background-color: var(--secondary-btn-bg);
+  color: var(--secondary-btn-txt);
   color: #000;
   cursor: pointer;
   text-align: center;
@@ -21,13 +23,11 @@
   border-radius: 1rem;
   padding: 1rem 2rem;
   text-decoration: none;
-  background-color: var(--pale-sky);
-  color: var(--deep-navy);
 }
 
 .buttonSecondary:hover {
-  background-color: var(--cool-horizon);
-  color: var(--txt);
+  background-color: var(--hover-btn-bg);
+  color: var(--btn-txt);
 }
 
 .btnPanel {

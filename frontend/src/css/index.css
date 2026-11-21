@@ -1,23 +1,45 @@
 :root {
-  --regal-navy: #134074;
-  --txt: #eef4ed;
-  --cool-horizon: #50a4f2;
-  --alabaster-grey: #dedee0;
-  --frosted-blue: #a6e1fa;
+  --main-bg: #fff;
+  --txt: #000;
+  /* Buttons */
+  --primary-btn-bg: #134074;
+  --primary-btn-txt: #fff;
+  --secondary-btn-bg: #eaf7ff;
+  --secondary-btn-txt: #000;
+  --hover-btn-bg: #50a4f2;
+  --hover-btn-txt: #fff;
+  /* Chat */
+  --received-bubble-bg: #dedee0;
+  --received-bubble-txt: #4b4b4b;
+  --sent-bubble-bg: #50a4f2;
+  --sent-bubble-txt: #efefef;
+  /* Settings */
+  --settings-bg: #a6e1fa;
+  --settings-list-bg: #e6f0fb;
+  --settings-list-txt: #000;
   --deep-navy: #001c55;
-  --pale-sky: #eaf7ff;
-  --background: #dedee0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --regal-navy: #9abee7;
-    --txt: #263624;
-    --cool-horizon: #77b3ea;
-    --alabaster-grey: #303033;
-    --frosted-blue: #b2e1f4;
-    --deep-navy: #a6c1f8;
-    --pale-sky: #141b1f;
+    --main-bg: #000;
+    --txt: #fff;
+    /* Buttons */
+    --primary-btn-bg: #1465b0;
+    --primary-btn-txt: #dcdcdc;
+    --secondary-btn-bg: #aeaeae;
+    --secondary-btn-txt: #eef4ed;
+    --hover-btn-bg: #50a4f2;
+    --hover-btn-txt: #fff;
+    /* Chat */
+    --received-bubble-bg: #727171;
+    --received-bubble-txt: #e7e7e7;
+    --sent-bubble-bg: #2590f5;
+    --sent-bubble-txt: #dcdcdc;
+    /* Settings */
+    --settings-bg: #134074;
+    --settings-list-bg: #6096d4;
+    --settings-list-txt: #fff;
   }
 }
 
@@ -25,4 +47,6 @@ body {
   font-family: "Quicksand Variable", sans-serif;
   font-weight: 400;
   font-style: normal;
+  background-color: var(--main-bg);
+  color: var(--txt);
 }

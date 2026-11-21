@@ -24,4 +24,5 @@ button,
 textarea,
 select {
   font: inherit;
+  color: #000;
 }
