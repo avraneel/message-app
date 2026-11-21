@@ -7,9 +7,11 @@ export default function Inbox() {
   const contacts = useOutletContext();
 
   if (contacts) {
-    const convoElements = contacts.map((el, ind) => (
-      <Convo name={el.username} key={ind} />
-    ));
+    /** el.ind !=== 1 means user "zero" (reserved user, to which messages sent to a deleted user points
+     * is not displayed */
+    const convoElements = contacts.map(
+      (el, ind) => el.id !== 1 && <Convo name={el.username} key={ind} />,
+    );
     return (
       <div className={styles.inbox}>
         <TopbarInbox />
