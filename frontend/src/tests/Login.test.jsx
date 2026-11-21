@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import Login from "./Login";
+import Login from "../components/Login";
 import { MemoryRouter } from "react-router";
-import { AuthProvider } from "./AuthContext";
+import { AuthProvider } from "../components/AuthContext";
 import userEvent from "@testing-library/user-event";
 
 const mockFetch = vi.fn().mockResolvedValueOnce({

@@ -1,6 +1,6 @@
 import { describe, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import Logo from "./Logo";
+import Logo from "../components/Logo";
 
 describe("Logo Component", () => {
   test("renders the correct alt text", () => {
