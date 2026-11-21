@@ -32,18 +32,22 @@ userRoutes.post("/", async (req, res) => {
 
 /** Deletes a user */
 userRoutes.delete("/:id", restrict, forbid, async (req, res) => {
-  await deleteUser(Number(req.params.id));
-  req.logOut((err) => {
-    if (err) {
-      return next(err);
-    } else {
-      req.session.destroy((err) => {
-        if (err) next(err);
-        res.clearCookie("connect.sid");
-        res.status(202).json({ message: "user deleted" });
-      });
-    }
-  });
+  try {
+    await deleteUser(Number(req.params.id));
+    req.logOut((err) => {
+      if (err) {
+        return next(err);
+      } else {
+        req.session.destroy((err) => {
+          if (err) next(err);
+          res.clearCookie("connect.sid");
+          res.status(202).json({ message: "user deleted" });
+        });
+      }
+    });
+  } catch (e) {
+    console.error(e);
+  }
 });
 
 /** Updates a user's username */

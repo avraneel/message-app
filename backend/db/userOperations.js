@@ -22,7 +22,7 @@ export async function deleteUser(userId) {
       // update messages sent to other users as 0 id
       prisma.message.updateMany({
         where: { toUserId: userId },
-        data: { toUserId: 0 },
+        data: { toUserId: 1 },
       }),
       // delete all sessions of user
       prisma.session.deleteMany({

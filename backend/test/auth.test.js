@@ -38,7 +38,6 @@ describe("logout route", async () => {
       .send({ username: "alice", password: "123" });
     expect(response.status).toBe(200);
     expect(response.get("Set-Cookie")).not.toBeNull();
-    const cookie = response.get("Set-Cookie");
   });
 });
 
