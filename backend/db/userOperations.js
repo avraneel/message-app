@@ -25,11 +25,10 @@ export async function deleteUser(userId) {
         data: { toUserId: 0 },
       }),
       // delete all sessions of user
-      await prisma.session.deleteMany({
+      prisma.session.deleteMany({
         where: {
           data: {
-            path: ["passport", "user"],
-            equals: req.params.id,
+            contains: `"user":${userId}`,
           },
         },
       }),
@@ -38,5 +37,24 @@ export async function deleteUser(userId) {
     ]);
   } catch (err) {
     console.error(err);
+  }
+}
+
+export async function getContacts(userId) {
+  try {
+    const contacts = await prisma.user.findMany({
+      where: {
+        id: {
+          not: userId,
+        },
+      },
+      select: {
+        id: true,
+        username: true,
+      },
+    });
+    return contacts;
+  } catch (e) {
+    console.error(e);
   }
 }

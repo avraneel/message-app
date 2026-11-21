@@ -6,6 +6,7 @@
   --frosted-blue: #a6e1fa;
   --deep-navy: #001c55;
   --pale-sky: #eaf7ff;
+  --background: #dedee0;
 }
 
 @media (prefers-color-scheme: dark) {

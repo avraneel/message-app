@@ -31,7 +31,7 @@ describe("/login route", () => {
   });
 });
 
-test("logout route", async () => {
+describe("logout route", async () => {
   test("returns a cookie on successful login", async () => {
     const response = await request(app)
       .post("/login")
