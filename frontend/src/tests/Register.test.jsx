@@ -1,6 +1,6 @@
 import { beforeEach, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import Signup from "../components/Signup";
+import Register from "../components/Register";
 import { MemoryRouter } from "react-router";
 import { AuthProvider } from "../components/AuthContext";
 
@@ -8,15 +8,15 @@ beforeEach(() => {
   render(
     <MemoryRouter>
       <AuthProvider>
-        <Signup />
+        <Register />
       </AuthProvider>
     </MemoryRouter>,
   );
 });
 
-describe("Signup Component", () => {
+describe("Register Component", () => {
   test("displays the correct title", () => {
-    expect(screen.getByRole("heading")).toHaveAccessibleName("Sign Up");
+    expect(screen.getByRole("heading")).toHaveAccessibleName("Register");
   });
 
   test("displays the username input field", () => {
@@ -42,10 +42,10 @@ describe("Signup Component", () => {
     expect(confirmPasswd).toHaveAttribute("name", "confirm-password");
   });
 
-  test("displays the Signup button and Back link", () => {
+  test("displays the Register button and Back link", () => {
     expect(screen.getByRole("link", { name: /back/i })).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: /sign up/i }),
+      screen.getByRole("button", { name: /Register/i }),
     ).toBeInTheDocument();
   });
 });

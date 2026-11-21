@@ -1,6 +1,6 @@
 import Root from "./components/Root.jsx";
 import Home from "./components/Home.jsx";
-import Signup from "./components/Signup.jsx";
+import Register from "./components/Register.jsx";
 import Login from "./components/Login.jsx";
 import Inbox from "./components/Inbox.jsx";
 import Settings from "./components/Settings.jsx";
@@ -22,7 +22,7 @@ export const routes = [
         path: "auth",
         Component: NotRequireAuth,
         children: [
-          { path: "signup", Component: Signup },
+          { path: "register", Component: Register },
           { path: "login", Component: Login },
         ],
       },

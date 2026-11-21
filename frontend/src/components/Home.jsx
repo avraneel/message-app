@@ -20,8 +20,8 @@ export default function Home() {
         <Logo />
         <h1>Message App</h1>
         <div className={styles.buttonPanel}>
-          <Link to="/auth/signup" className={btnStyles.buttonPrimary}>
-            Sign Up
+          <Link to="/auth/register" className={btnStyles.buttonPrimary}>
+            Register
           </Link>
           <Link to="/auth/login" className={btnStyles.buttonPrimary}>
             Login

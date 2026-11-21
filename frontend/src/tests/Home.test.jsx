@@ -21,8 +21,8 @@ describe("Home Component", () => {
     ).toBeInTheDocument();
   });
 
-  test("display sign up and login links", () => {
-    expect(screen.getByRole("link", { name: /sign up/i })).toBeInTheDocument();
+  test("display register and login links", () => {
+    expect(screen.getByRole("link", { name: /register/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /login/i })).toBeInTheDocument();
   });
 });

@@ -5,7 +5,7 @@ import Logo from "./Logo";
 import url from "../globals";
 import { useNavigate } from "react-router";
 
-export default function Signup() {
+export default function Register() {
   let navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -15,6 +15,12 @@ export default function Signup() {
     const formData = new FormData(form);
     const username = formData.get("username");
     const password = formData.get("password");
+    const confirmPasswd = formData.get("confirm-password");
+
+    if (password !== confirmPasswd) {
+      alert("Password fields must match!");
+      return;
+    }
 
     const requestBody = {
       username: username,
@@ -33,9 +39,13 @@ export default function Signup() {
       });
 
       if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
+        const { message } = await response.json();
+        alert(message);
+        return;
+        //throw new Error(`Response status: ${response.status}`);
+      } else {
+        navigate("/auth/login");
       }
-      navigate("/auth/login");
     } catch (err) {
       console.error(err);
     }
@@ -44,7 +54,7 @@ export default function Signup() {
   return (
     <div className={formStyles.formPage}>
       <Logo />
-      <h1 className={formStyles.formHeading}>Sign Up</h1>
+      <h1 className={formStyles.formHeading}>Register</h1>
       <form onSubmit={handleSubmit} method="post" className={formStyles.form}>
         <div className={formStyles.formBody}>
           <div className={formStyles.formItem}>
@@ -80,7 +90,7 @@ export default function Signup() {
         </div>
         <div className={btnStyles.btnPanel}>
           <SecondaryButton text="Back" url="/" />
-          <button className={btnStyles.buttonPrimary}>Sign Up</button>
+          <button className={btnStyles.buttonPrimary}>Register</button>
         </div>
       </form>
     </div>
