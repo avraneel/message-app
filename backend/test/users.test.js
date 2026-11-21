@@ -42,7 +42,7 @@ describe("/users route", () => {
         .send({ username: "alice", password: "123" });
       expect(registerResponse.status).toBe(201);
       const putReponse = await request(app)
-        .put("/users/alice/username")
+        .put("/users/${loginResponse.body.user.id}/username")
         .send({ newUsername: "bob" });
       expect(putReponse.status).toBe(401);
     });
@@ -63,6 +63,7 @@ describe("/users route", () => {
         .set("Cookie", [cookie])
         .send({ newUsername: "bob" });
       expect(putReponse.status).toBe(200);
+      expect(putReponse.body.username).toBe("bob");
     });
   });
 
