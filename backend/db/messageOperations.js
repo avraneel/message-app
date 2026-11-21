@@ -10,7 +10,6 @@ export async function deleteAllMessagesFromUser(userId) {
         where: { toUserId: userId },
         data: { toUserId: 0 },
       }),
-      prisma.user.delete({ where: { userId } }),
     );
   } catch (err) {
     console.error(err);

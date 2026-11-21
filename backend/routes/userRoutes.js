@@ -28,7 +28,35 @@ userRoutes.post("/", async (req, res) => {
 
 /** Deletes a user */
 userRoutes.delete("/:id", restrict, forbid, async (req, res) => {
-  await deleteUser(Number(req.params.id));
+  await prisma.$transaction([
+    // Delete messages from user
+    await prisma.message.deleteMany({
+      where: {
+        fromUserId: Number(req.params.id),
+      },
+    }),
+    // update messages sent to other usres as 0 id
+    prisma.message.updateMany({
+      where: { toUserId: userId },
+      data: { toUserId: 0 },
+    }),
+    // delete all sessions of user
+    await prisma.session.deleteMany({
+      where: {
+        data: {
+          path: ["passport", "user"],
+          equals: req.params.id,
+        },
+      },
+    }),
+    // finally user can be deleted
+    await prisma.user.delete({
+      where: {
+        id: Number(req.params.id),
+      },
+    }),
+  ]);
+
   req.logOut((err) => {
     if (err) {
       return next(err);

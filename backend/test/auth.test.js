@@ -31,6 +31,17 @@ describe("/login route", () => {
   });
 });
 
+test("logout route", async () => {
+  test("returns a cookie on successful login", async () => {
+    const response = await request(app)
+      .post("/login")
+      .send({ username: "alice", password: "123" });
+    expect(response.status).toBe(200);
+    expect(response.get("Set-Cookie")).not.toBeNull();
+    const cookie = response.get("Set-Cookie");
+  });
+});
+
 describe("id route", () => {
   test("gets userId from cookie", async () => {
     const loginResponse = await request(app)
