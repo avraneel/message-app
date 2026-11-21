@@ -18,7 +18,6 @@ async function main() {
       password: hashedPassword,
     },
   });
-  console.log("zero user created");
 }
 main()
   .then(async () => {

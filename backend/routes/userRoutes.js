@@ -2,7 +2,6 @@ import { Router } from "express";
 import bcrypt from "bcryptjs";
 import prisma from "../lib/prisma.js";
 import { restrict, forbid } from "../restrict.js";
-import { validationResult } from "express-validator";
 import {
   createUser,
   deleteUser,
@@ -16,8 +15,6 @@ const userRoutes = Router();
 userRoutes.post("/", async (req, res) => {
   try {
     const { username, password } = req.body;
-    const result = validationResult(req);
-    console.log(result);
     if (!(await doesUsernameExist(username))) {
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await createUser(username, hashedPassword);
