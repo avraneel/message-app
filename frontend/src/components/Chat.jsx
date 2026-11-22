@@ -72,7 +72,7 @@ export default function Chat() {
         throw new Error(`send response status: ${response.status}`);
       }
       const data = await response.json();
-      setMessages(data);
+      setMessages(data[1]);
       setMessageText("");
     } catch (err) {
       console.error(err);
