@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node --watch server.js",
     "migrate": "npx prisma migrate dev && npx prisma generate",
-    "resetdb": "npx prisma migrate reset && npx prisma generate && npx prisma db seed",
+    "resetdb": "npx prisma migrate reset && npx prisma migrate dev && npx prisma generate && npx prisma db seed",
     "test": "vitest"
   },
   "keywords": [],

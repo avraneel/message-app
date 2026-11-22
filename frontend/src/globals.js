@@ -1,3 +1,5 @@
-const url = "http://localhost:3000";
+import "dotenv/config";
+
+const url = process.env.BACKEND_URL;
 
 export default url;
