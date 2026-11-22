@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import SecondaryButton from "./buttons/SecondaryButton";
 import styles from "../css/Settings.module.css";
 import btnStyles from "../css/Button.module.css";
@@ -7,6 +7,7 @@ import { useAuth } from "./useAuth";
 
 export default function Settings() {
   const [, setLoggedInUser] = useAuth();
+  const navigate = useNavigate();
   async function logout() {
     const headers = new Headers({
       "Content-Type": "application/json",
@@ -25,6 +26,7 @@ export default function Settings() {
         loggedInUserId: 0,
         loggedInUsername: "",
       });
+      navigate("/");
     }
   }
 
