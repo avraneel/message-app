@@ -1,5 +1,3 @@
-import "dotenv/config";
-
-const url = process.env.BACKEND_URL;
+const url = "https://message-app-zlso.onrender.com";
 
 export default url;
