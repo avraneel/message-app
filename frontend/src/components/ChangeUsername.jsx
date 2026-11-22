@@ -11,9 +11,19 @@ export default function ChangeUsername() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const oldUsername = formData.get("old-username");
+
     const headers = new Headers({
       "Content-Type": "application/json",
     });
+
+    if (oldUsername !== loggedInUser.loggedInUsername) {
+      alert("old username does not match!");
+      return;
+    }
 
     const requestBody = {
       newUsername: newUsername,
