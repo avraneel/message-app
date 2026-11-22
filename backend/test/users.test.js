@@ -96,54 +96,94 @@ describe("/users route", () => {
         .send({ newPassword: "1234" });
       expect(putReponse.status).toBe(200);
     });
+  });
 
-    describe("GET routes", () => {
-      test("/contact route", async () => {
-        await request(app)
-          .post("/users")
-          .send({ username: "alice", password: "123" });
-        await request(app)
-          .post("/users")
-          .send({ username: "bob", password: "123" });
-        await request(app)
-          .post("/users")
-          .send({ username: "cat", password: "123" });
-        await request(app)
-          .post("/users")
-          .send({ username: "delta", password: "123" });
-        await request(app)
-          .post("/users")
-          .send({ username: "delta", password: "123" });
-        const loginResponse = await request(app).post("/login").send({
-          username: "alice",
-          password: "123",
-        });
-        expect(loginResponse.status).toBe(200);
-        const cookie = loginResponse.headers["set-cookie"];
-        const getReponse = await request(app)
-          .get(`/users/${loginResponse.body.user.id}/contacts`)
-          .set("Cookie", [cookie]);
-        expect(getReponse.status).toBe(200);
-        expect(getReponse.body.map((el) => el.username)).toEqual([
-          "bob",
-          "cat",
-          "delta",
-        ]);
+  describe("GET routes", () => {
+    test("/contact route", async () => {
+      await request(app)
+        .post("/users")
+        .send({ username: "alice", password: "123" });
+      await request(app)
+        .post("/users")
+        .send({ username: "bob", password: "123" });
+      await request(app)
+        .post("/users")
+        .send({ username: "cat", password: "123" });
+      await request(app)
+        .post("/users")
+        .send({ username: "delta", password: "123" });
+      await request(app)
+        .post("/users")
+        .send({ username: "delta", password: "123" });
+      const loginResponse = await request(app).post("/login").send({
+        username: "alice",
+        password: "123",
       });
-      test("/:id route", async () => {
-        await request(app)
-          .post("/users")
-          .send({ username: "alice", password: "123" });
-        const loginResponse = await request(app).post("/login").send({
-          username: "alice",
-          password: "123",
-        });
-        const cookie = loginResponse.headers["set-cookie"];
-        const getReponse = await request(app)
-          .get(`/users/${loginResponse.body.user.id}/contacts`)
-          .set("Cookie", [cookie]);
-        expect(getReponse.status).toBe(200);
-      });
+      expect(loginResponse.status).toBe(200);
+      const cookie = loginResponse.headers["set-cookie"];
+      const getReponse = await request(app)
+        .get(`/users/${loginResponse.body.user.id}/contacts`)
+        .set("Cookie", [cookie]);
+      expect(getReponse.status).toBe(200);
+      expect(getReponse.body.map((el) => el.username).sort()).toEqual([
+        "bob",
+        "cat",
+        "delta",
+      ]);
+    });
+  });
+
+  describe("DELETE /users/:id", () => {
+    beforeEach(async () => {
+      await request(app)
+        .post("/users")
+        .send({ username: "alice", password: "123" });
+      await request(app)
+        .post("/users")
+        .send({ username: "bob", password: "123" });
+    });
+
+    test("returns 401 if no cookie is sent", async () => {
+      const loginResponse = await request(app)
+        .post("/login")
+        .send({ username: "alice", password: "123" });
+      const id = loginResponse.body.id;
+      const response = await request(app).delete(`/users/${id}`);
+      expect(response.status).toBe(401);
+    });
+
+    test("returns 403 if deleting bob with alice's cookie", async () => {
+      const loginResponseAlice = await request(app)
+        .post("/login")
+        .send({ username: "alice", password: "123" });
+      const loginResponseBob = await request(app)
+        .post("/login")
+        .send({ username: "bob", password: "123" });
+      expect(loginResponseAlice.status).toBe(200);
+      const aliceCookie = loginResponseAlice.get("set-cookie");
+      const bobId = loginResponseBob.body.user.id;
+      const response = await request(app)
+        .delete(`/users/${bobId}`)
+        .set("cookie", aliceCookie);
+      expect(response.status).toBe(403);
+    });
+
+    test("returns 202 if alice is deleted", async () => {
+      const loginResponseAlice = await request(app)
+        .post("/login")
+        .send({ username: "alice", password: "123" });
+      expect(loginResponseAlice.status).toBe(200);
+      const aliceCookie = loginResponseAlice.get("set-cookie");
+      const aliceId = loginResponseAlice.body.user.id;
+      const response = await request(app)
+        .delete(`/users/${aliceId}`)
+        .set("cookie", aliceCookie);
+      expect(response.status).toBe(202);
+      /** if alice is deleted we can re-register her */
+      const reRegisterResponse = await request(app)
+        .post("/users")
+        .send({ username: "alice", password: "123" });
+      expect(reRegisterResponse.status).toBe(201);
     });
   });
 });
