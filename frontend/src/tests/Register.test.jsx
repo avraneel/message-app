@@ -1,20 +1,20 @@
-import { beforeEach, expect } from "vitest";
+import { beforeEach, describe, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Register from "../components/Register";
 import { MemoryRouter } from "react-router";
 import { AuthProvider } from "../components/AuthContext";
 
-beforeEach(() => {
-  render(
-    <MemoryRouter>
-      <AuthProvider>
-        <Register />
-      </AuthProvider>
-    </MemoryRouter>,
-  );
-});
+describe("Register Component Static", () => {
+  beforeEach(() => {
+    render(
+      <MemoryRouter>
+        <AuthProvider>
+          <Register />
+        </AuthProvider>
+      </MemoryRouter>,
+    );
+  });
 
-describe("Register Component", () => {
   test("displays the correct title", () => {
     expect(screen.getByRole("heading")).toHaveAccessibleName("Register");
   });
