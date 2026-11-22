@@ -13,6 +13,21 @@ export default function ChangePassword() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const oldPasswd = formData.get("old-password");
+    const confirmPasswd = formData.get("confirm-password");
+
+    if (oldPasswd !== loggedInUser.loggedInUsername) {
+      alert("old password does not match!");
+      return;
+    }
+    if (confirmPasswd !== newPassword) {
+      alert("new and confirm passwords must match!");
+      return;
+    }
+
     const headers = new Headers({
       "Content-Type": "application/json",
     });
