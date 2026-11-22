@@ -16,13 +16,9 @@ export default function ChangePassword() {
 
     const form = e.target;
     const formData = new FormData(form);
-    const oldPasswd = formData.get("old-password");
+    // const oldPasswd = formData.get("old-password");
     const confirmPasswd = formData.get("confirm-password");
 
-    if (oldPasswd !== loggedInUser.loggedInUsername) {
-      alert("old password does not match!");
-      return;
-    }
     if (confirmPasswd !== newPassword) {
       alert("new and confirm passwords must match!");
       return;
@@ -62,7 +58,7 @@ export default function ChangePassword() {
         onSubmit={handleSubmit}
       >
         <div className={formStyles.formBody}>
-          <div className={formStyles.formItem}>
+          {/* <div className={formStyles.formItem}>
             <label htmlFor="old-password">Old Password *</label>
             <input
               type="password"
@@ -71,7 +67,7 @@ export default function ChangePassword() {
               className={formStyles.inputElement}
               required
             />
-          </div>
+          </div> */}
           <div className={formStyles.formItem}>
             <label htmlFor="new-password">New Password *</label>
             <input

@@ -21,13 +21,13 @@ describe("Change Password Component", () => {
     ).toBeInTheDocument();
   });
 
-  test("displays the old password input field", () => {
-    const oldPassword = screen.getByLabelText("Old Password *");
-    expect(oldPassword).toBeVisible();
-    expect(oldPassword).toBeRequired();
-    expect(oldPassword).toHaveAttribute("name", "old-password");
-    expect(oldPassword).toHaveAttribute("type", "password");
-  });
+  // test("displays the old password input field", () => {
+  //   const oldPassword = screen.getByLabelText("Old Password *");
+  //   expect(oldPassword).toBeVisible();
+  //   expect(oldPassword).toBeRequired();
+  //   expect(oldPassword).toHaveAttribute("name", "old-password");
+  //   expect(oldPassword).toHaveAttribute("type", "password");
+  // });
 
   test("displays the new password input field", () => {
     const newUsername = screen.getByLabelText("New Password *");
